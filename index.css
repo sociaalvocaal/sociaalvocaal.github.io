@@ -135,7 +135,6 @@ a:focus-visible, button:focus-visible, input:focus-visible {
     padding-bottom: var(--space-xl); 
 }
 .text-center { text-align: center; }
-.text-center { text-align: center; }
 .margin-auto { margin-left: auto; margin-right: auto; }
 .max-w-content { 
     width: 100%;
@@ -240,6 +239,58 @@ a:focus-visible, button:focus-visible, input:focus-visible {
 }
 
 /* ==========================================================================
+   Zigzag-layout (Concertdata en Muzikale dankbaarheid)
+   ========================================================================== */
+.zigzag-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+    align-items: center;
+    margin-bottom: var(--space-xl);
+}
+
+/* Haal de marge onder de laatste rij weg om dubbele witruimte te voorkomen */
+.zigzag-row:last-child {
+    margin-bottom: 0;
+}
+
+/* Vaste aspect-ratio voorkomt CLS (Cumulative Layout Shift) tijdens inladen */
+.zigzag-img {
+    width: 100%;
+    aspect-ratio: 4 / 3; 
+    object-fit: cover;
+    border-radius: var(--radius-md);
+}
+
+/* Vanaf tablet/desktop verdelen we de ruimte 50/50 en passen we de zigzag toe */
+@media (min-width: 768px) {
+    .zigzag-row {
+        grid-template-columns: 1fr 1fr;
+        gap: clamp(2rem, 6vw, 5rem); /* Dynamische witruimte die vloeiend meeschaalt */
+    }
+    
+    /* Oneven rijen (Rij 1): Beeld links, Tekst rechts */
+    .zigzag-row:nth-child(odd) .zigzag-media {
+        grid-column: 1;
+        grid-row: 1;
+    }
+    .zigzag-row:nth-child(odd) .zigzag-content {
+        grid-column: 2;
+        grid-row: 1;
+    }
+    
+    /* Even rijen (Rij 2): Tekst links, Beeld rechts (zoals al in de DOM staat) */
+    .zigzag-row:nth-child(even) .zigzag-content {
+        grid-column: 1;
+        grid-row: 1;
+    }
+    .zigzag-row:nth-child(even) .zigzag-media {
+        grid-column: 2;
+        grid-row: 1;
+    }
+}
+
+/* ==========================================================================
    Afbeeldingen-grid
    ========================================================================== */
 .image-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-md); }
@@ -261,7 +312,7 @@ a:focus-visible, button:focus-visible, input:focus-visible {
     word-wrap: break-word; 
 }
 
-/* Primaire Gelaagde Kaart (Zing mee) */
+/* Primaire gelaagde kaart (Zing mee) */
 .card-primary { background-color: var(--primary); color: var(--on-primary); }
 .card-primary p, .card-primary li { color: var(--on-primary-container); }
 .card-primary h2, .card-primary h3 { color: var(--on-primary); }
@@ -275,7 +326,19 @@ a:focus-visible, button:focus-visible, input:focus-visible {
 }
 
 .check-list { list-style: none; padding: 0; margin-bottom: var(--space-md); }
-.check-list li { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem; font-weight: 500; }
+.check-list li { 
+    display: flex; 
+    align-items: flex-start;
+    gap: 0.5rem; 
+    margin-bottom: 1rem; 
+    font-weight: 500; 
+}
+
+/* Zorgt dat het icoon visueel perfect in het midden van de eerste tekstregel valt en niet platdrukt op mobiel */
+.check-list li .material-symbols-outlined {
+    margin-top: 0.1rem;
+    flex-shrink: 0; 
+}
 
 /* Decoratief icoon */
 .bg-icon { 
@@ -347,7 +410,7 @@ a:focus-visible, button:focus-visible, input:focus-visible {
     font-size: clamp(1.25rem, 2.5vw, 1.5rem); /* Iets subtieler in het accordeon */
 }
 
-/* Icoon styling & animatie */
+/* Icoonstijling en animatie */
 .faq-icon {
     color: var(--primary);
     font-size: 2rem;
@@ -376,7 +439,7 @@ details[open] .faq-content {
 .faq-sub-content h4 { margin-top: 0; margin-bottom: var(--space-xs); }
 .faq-sub-content p:last-child { margin-bottom: 0; }
 
-/* Simpele CSS animatie om de tekst zacht te laten verschijnen */
+/* Simpele css-animatie om de tekst zacht te laten verschijnen */
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(-5px); }
     to { opacity: 1; transform: translateY(0); }
@@ -400,7 +463,7 @@ details[open] .faq-content {
     grid-template-columns: 1fr; 
     gap: var(--space-md); 
     padding-bottom: var(--space-md); 
-    border-bottom: 1px solid var(--surface-variant); /* Subtiele scheiding binnen het blok i.p.v. een dubbele footer */
+    border-bottom: 1px solid var(--surface-variant); /* Subtiele scheiding binnen het blok*/
 }
 @media(min-width: 850px) { 
     .footer-grid { grid-template-columns: 2fr 1fr; } 
@@ -439,4 +502,167 @@ details[open] .faq-content {
     font-size: 0.875rem; 
     color: var(--on-surface-variant); 
     margin-bottom: 0; 
+}
+
+/* ==========================================================================
+   Horizontal Card Carousel (Partners/Sponsors)
+   ========================================================================== */
+
+/* Layout & Scroll Snap met Edge-to-Edge berekening */
+.sponsor-track {
+    display: flex;
+    gap: var(--space-md);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    
+    /* Edge-to-Edge wiskunde */
+    padding-inline: max(1.5rem, calc((100% - 55rem) / 2));
+    scroll-padding-inline: max(1.5rem, calc((100% - 55rem) / 2));
+    
+    /* Padding-block (boven en onder) voorkomt afgesneden focusringen */
+    padding-block: 1rem var(--space-md); 
+    
+    scrollbar-color: var(--primary) var(--surface-container-low);
+    scrollbar-width: thin;
+}
+
+/* WCAG Motion Sickness preventie */
+@media (prefers-reduced-motion: no-preference) {
+    .sponsor-track {
+        scroll-behavior: smooth;
+    }
+}
+
+/* Custom scrollbar - Webkit (Chrome, Safari, Edge) */
+.sponsor-track::-webkit-scrollbar {
+    height: 12px; /* Duidelijk zichtbaar, toegankelijk formaat */
+}
+.sponsor-track::-webkit-scrollbar-track {
+    background: var(--surface-container-low);
+    border-radius: var(--radius-sm);
+}
+.sponsor-track::-webkit-scrollbar-thumb {
+    background-color: var(--primary); /* Mooi donkergroen */
+    border-radius: var(--radius-sm);
+    /* Door een border toe te voegen lijkt de scrollbar niet te strak tegen de rand te zitten */
+    border: 3px solid var(--surface-container-low); 
+}
+
+/* Focus voor de scrolbare track (toetsenbord) */
+.sponsor-track:focus-visible {
+    outline: 3px solid var(--primary);
+    outline-offset: -3px; /* Naar binnen gericht zodat hij niet buiten het scherm valt */
+    border-radius: var(--radius-sm);
+}
+
+/* Cardstyling en equal heights */
+.sponsor-card {
+    flex: 0 0 85%;
+    max-width: 380px;
+    min-height: 100%; /* Zorgt dat alle kaarten even hoog zijn in de flex-track */
+    scroll-snap-align: start;
+    border-radius: var(--radius-md);
+    display: flex;
+    flex-direction: column;
+}
+
+/* Card-content - Garandeert dat de knoppen onderaan uitlijnen */
+.card-content {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; 
+}
+
+/* Media en logo - Bulletproof 16:9 ratio hack */
+.card-media {
+    position: relative;
+    width: 100%;
+    /* We gebruiken de padding-hack (9 gedeeld door 16 = 56.25%) ipv aspect-ratio */
+    padding-bottom: 56.25%; 
+    height: 0; 
+    flex-shrink: 0; 
+    background-color: var(--surface-container-highest);
+    border-radius: var(--radius-md) var(--radius-md) 0 0;
+}
+
+.card-afbeelding {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: var(--radius-md) var(--radius-md) 0 0;
+}
+
+/* Gedeelde basis voor de logo-cirkel */
+.card-logo, .placeholder-logo {
+    position: absolute;
+    bottom: -1.5rem;
+    right: 1.5rem;
+    width: 72px;
+    height: 72px;
+    background-color: #fefefe;
+    border-radius: 50%;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    z-index: 2;
+}
+
+/* Echte afbeelding logo's krijgen padding zodat ze niet strak tegen de rand plakken */
+img.card-logo {
+    object-fit: contain;
+    padding: 0.5rem;
+}
+
+/* Fallback voor missende logo's (wervingstekst) */
+.placeholder-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0; /* Belangrijk: haalt de padding weg zodat het perfect in het midden staat! */
+    font-size: 0.9rem; 
+    font-weight: 800;
+    font-family: var(--font-heading); /* Fraunces lettertype! */
+    color: var(--primary);
+    line-height: 1.1; 
+    text-transform: lowercase;
+}
+
+/* Body- en flex-grow voor variabele tekst */
+.card-body {
+    padding: 2.5rem 1.5rem 1.5rem; /* Extra ruimte boven voor het absolute logo */
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Laat de body de resterende hoogte vullen */
+}
+
+.card-titel {
+    margin-bottom: 0.25rem;
+}
+
+.card-tagline {
+    font-size: 0.875rem;
+    margin-bottom: var(--space-sm);
+    display: block;
+}
+
+.card-tekst {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: var(--space-md);
+}
+
+/* Call-to-action onderaan vastzetten */
+.card-cta {
+    margin-top: auto; 
+    align-self: flex-start; /* Zorgt dat de knop niet de hele breedte pakt */
+}
+
+/* Handig hulp-klasje voor text kleuren als je dat nog niet had */
+.text-primary {
+    color: var(--primary);
+}
+.font-bold {
+    font-weight: 700;
 }
