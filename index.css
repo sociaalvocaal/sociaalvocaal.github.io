@@ -205,9 +205,16 @@ a:focus-visible, button:focus-visible, input:focus-visible {
     cursor: pointer;
     text-align: center;
     border: 2px solid transparent;
+    max-width: 100%;
+    white-space: normal;
+    overflow-wrap: break-word;
 }
 .btn-small { padding: 0.5rem 1rem; font-size: 1rem; }
-.btn-large { padding: 1rem 2rem; font-size: 1.125rem; }
+.btn-large { 
+    /* De padding aan de zijkant schaalt mee van 1rem (mobiel) naar 2rem (desktop) */
+    padding: 1rem clamp(1rem, 5vw, 2rem); 
+    font-size: 1.125rem; 
+}
 .btn-primary { background-color: var(--primary); color: var(--on-primary); }
 .btn-primary:hover { opacity: 0.9; }
 .btn-white { background-color: #fefefe; color: var(--primary); box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
@@ -417,7 +424,7 @@ a:focus-visible, button:focus-visible, input:focus-visible {
 }
 
 /* ==========================================================================
-   FAQ-accordeoncomponent
+   Veelgestelde vragen
    ========================================================================== */
 .faq-list { 
     display: flex; 
@@ -462,12 +469,23 @@ a:focus-visible, button:focus-visible, input:focus-visible {
     background-color: var(--surface-container-low);
 }
 
-/* Zorg dat de h3 in de knop geen witruimte onder zich heeft */
-.faq-summary h3 {
+/* Zorg dat de h4 in de knop geen witruimte onder zich heeft */
+.faq-summary h4 {
     margin: 0;
-    font-size: clamp(1.25rem, 2.5vw, 1.5rem); /* Iets subtieler in het accordeon */
+    font-size: clamp(1.15rem, 2vw, 1.25rem); /* Iets subtieler in het accordeon */
+    line-height: 1.3;
 }
 
+/* Voor de subkopjes binnenin een lang antwoord (bijv. de kosten) */
+.faq-sub-content h5 { 
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-top: 0; 
+    margin-bottom: var(--space-xs); 
+}
+
+.faq-sub-content p:last-child { margin-bottom: 0; }
 /* Icoonstijling en animatie */
 .faq-icon {
     color: var(--primary);
@@ -493,9 +511,6 @@ details[open] .faq-content {
     padding-top: 1.5rem;
     animation: fadeIn 0.4s ease-out;
 }
-
-.faq-sub-content h4 { margin-top: 0; margin-bottom: var(--space-xs); }
-.faq-sub-content p:last-child { margin-bottom: 0; }
 
 /* Simpele css-animatie om de tekst zacht te laten verschijnen */
 @keyframes fadeIn {
@@ -680,6 +695,14 @@ img.card-logo {
     padding: 0.5rem;
 }
 
+/* Zorgt dat de afbeelding in de picture-tag de cirkel vult met behoud van padding */
+picture.card-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 0.5rem;
+}
+
 /* Zorg dat de wervingstekst netjes meeschaalt en niet overloopt */
 .placeholder-logo {
     display: flex;
@@ -849,9 +872,11 @@ img.card-logo {
     /* 6. Sponsor Logo's fix */
     /* De echte logo's met .card-logo laten we met rust (die blijven wit ivm transparantie) */
     
+    /* Donkere of lichte modus logo bij partner-sectie */
+    .card-logo,
     .placeholder-logo {
         background-color: var(--surface-container-highest);
-        color: var(--on-surface); /* Witte tekst op donkergrijs voor > 7:1 contrast */
+        color: var(--on-surface); 
     }
     
     /* 7. Oogrust voor afbeeldingen */
@@ -868,5 +893,90 @@ img.card-logo {
     .hero-heading {
         /* De schaduw in dark mode naar rgba-zwart voor diepte zonder dat het onleesbaar wordt */
         text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.4); 
+    }
+}
+
+/* ==========================================================================
+   Toegankelijkheid Hulpmiddelen (Screen Reader Only)
+   ========================================================================== */
+/* Verbergt elementen visueel, maar houdt ze volledig leesbaar voor schermlezers (WCAG AAA) */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* ==========================================================================
+   Onze muzikale impact-sectie:(Typografische datalijst)
+   ========================================================================== */
+.impact-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.impact-row {
+    display: grid;
+    /* FIX 1: Vaste, meeschalende breedte voor het getal. Zo danst de tekstkolom nooit! */
+    grid-template-columns: clamp(3rem, 10vw, 5rem) 1fr;
+    gap: var(--space-md);
+    /* FIX 2: Boven uitlijnen voor een rustig beeld bij lange zinnen op mobiel */
+    align-items: flex-start; 
+    padding: var(--space-sm) 0;
+    border-bottom: 1px solid var(--surface-container-high);
+}
+
+.impact-row:first-child {
+    border-top: 1px solid var(--surface-container-high);
+}
+
+.impact-term {
+    /* Visueel naar de 2e kolom forceren */
+    grid-column: 2;
+    grid-row: 1;
+    font-weight: 500;
+    font-size: clamp(1rem, 2vw, 1.125rem);
+    color: var(--on-surface-variant);
+    line-height: 1.4;
+    margin: 0;
+    /* Subtiele marge bovenop zodat de tekst optisch perfect uitlijnt met de bovenkant van het gigantische getal */
+    margin-top: 0.5rem; 
+}
+
+.impact-number {
+    /* Visueel naar de 1e kolom forceren */
+    grid-column: 1;
+    grid-row: 1;
+    font-family: var(--font-heading);
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 800;
+    color: var(--primary);
+    line-height: 1;
+    margin: 0;
+}
+
+/* ==========================================================================
+   Onze muzikale impact-sectie: Toegankelijkheid overrides (High Contrast & Dark Mode)
+   ========================================================================== */
+@media (forced-colors: active) {
+    .impact-row {
+        border-bottom: 1px solid CanvasText !important;
+    }
+    .impact-row:first-child {
+        border-top: 1px solid CanvasText !important;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    .impact-row {
+        border-bottom-color: var(--surface-container-highest);
+    }
+    .impact-row:first-child {
+        border-top-color: var(--surface-container-highest);
     }
 }
