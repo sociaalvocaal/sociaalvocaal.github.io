@@ -3,8 +3,8 @@
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Geef iemand op voor een gratis concert | Sociaal Vocaal</title>
-    <meta name="description" content="Wij vieren en troosten mensen met een muzikale koorserenade. Vraag gratis een serenade aan in de omgeving Utrecht of kom meezingen!">
+    <title>Verras met een gratis serenade in Utrecht | Sociaal Vocaal</title>
+    <meta name="description" content="Verras iemand met een gratis serenade in Utrecht! Sociaal Vocaal is een a-capellakoor dat zingt om te bedanken, op te vrolijken of te troosten.">
     <!-- Note to self: update later hieronder de canonical met jullie definitieve, beveiligde url. Dat is goed voor de SEO. -->
     <link rel="canonical" href="https://sociaalvocaal.github.io/" />
     <link rel="stylesheet" href="index.css">
@@ -15,15 +15,86 @@
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-<body>
-    <a href="#hoofdinhoud" class="skip-link">Sla over naar hoofdinhoud</a>
 
-    <nav aria-label="Hoofdnavigatie" class="navbar">
-        <div class="container navbar-container">
-            <div class="navbar-spacer" aria-hidden="true"></div>
-            <div class="logo">Sociaal Vocaal</div>
+<body>
+<!-- Floating Pill Header met ingebouwde skiplinks-hub -->
+
+<header id="main-header" class="floating-pill">
+    
+    <!-- Skip-links Hub (Verborgen totdat je Tab gebruikt) -->
+    <nav aria-label="Snelkoppelingen" class="skip-links-hub">
+        <ul class="skip-list">
+            <li><a href="#hoofdinhoud" class="skip-btn">Naar hoofdinhoud</a></li>
+            <li><a href="#concert-aanvragen" class="skip-btn">Direct concert aanvragen</a></li>
+            <li><a href="#sitemap-placeholder" class="skip-btn">Naar sitemap</a></li>
+        </ul>
+    </nav>
+
+    <!-- De altijd zichtbare basis van de pil -->
+    <div class="pill-bar">
+        <!-- Slim logo dat animeert bij scrollen -->
+        <a href="#" class="logo-link" aria-label="Sociaal Vocaal startpagina">
+            <span class="logo-text-container">
+                <span class="logo-full">Sociaal Vocaal</span>
+                <span class="logo-short" aria-hidden="true">SV</span>
+            </span>
+        </a>
+
+        <!-- Actieknoppen en menu-toggle -->
+        <div class="pill-actions">
+            <!-- Desktop acties: visueel verborgen op mobiel om de pil compact te houden -->
+            <a href="#concert-aanvragen" class="btn btn-primary btn-small desktop-only">Concert aanvragen</a>
+            <a href="#doe-mee" class="btn btn-white btn-small desktop-only">Zing mee</a>
+            
+            <button id="menu-toggle" class="menu-btn" aria-expanded="false" aria-controls="morphing-menu" aria-label="Open hoofdmenu">
+                <span class="menu-btn-text sr-only">Menu</span>
+                <span class="material-symbols-outlined icon-open" aria-hidden="true">menu</span>
+                <span class="material-symbols-outlined icon-close" aria-hidden="true">close</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Het uitrekkende Bento-menu -->
+    <nav id="morphing-menu" class="morphing-container" aria-label="Hoofdmenu">
+        <div class="menu-inner">
+            <div class="menu-bento-grid">
+                
+                <div class="menu-bento-item card-white">
+                    <h3 class="menu-heading">Snel regelen</h3>
+                    <ul class="menu-list">
+                        <li>
+                            <span class="material-symbols-outlined text-primary" aria-hidden="true">favorite</span>
+                            <a href="#concert-aanvragen">Gratis concert aanvragen</a>
+                        </li>
+                        <li>
+                            <span class="material-symbols-outlined text-primary" aria-hidden="true">music_note</span>
+                            <a href="#doe-mee">Zing mee in ons koor</a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="menu-bento-item card-white">
+                    <h3 class="menu-heading">Ontdekken</h3>
+                    <ul class="menu-list">
+                        <li><a href="#">Agenda & optredens</a></li>
+                        <li><a href="#">Onze muziek</a></li>
+                        <li><a href="#ons-verhaal">Over ons</a></li>
+                    </ul>
+                </div>
+                
+                <div class="menu-bento-item card-white">
+                    <h3 class="menu-heading">Samenwerken & steunen</h3>
+                    <ul class="menu-list">
+                        <li><a href="#samenwerken">Artistiek samenwerken</a></li>
+                        <li><a href="#samenwerken">Zakelijk inhuren</a></li>
+                        <li><a href="#samenwerken">Sponsoren & Doneren</a></li>
+                    </ul>
+                </div>
+
+            </div>
         </div>
     </nav>
+</header>
 
     <main id="hoofdinhoud">
         <section class="hero-section section-padding">
@@ -31,7 +102,10 @@
                 <div class="hero-content">
                     <h1 class="hero-heading">
                         Een <span class="font-italic">muzikaal</span> gebaar dat nazingt in het&nbsp;<span class="font-italic">hart</span>.
-                    </h1>
+                    </h1>   
+                        <p class="hero-lead">
+                        Verras iemand met een gratis serenade in Utrecht! Sociaal Vocaal is een a-capellakoor dat zingt om te bedanken, op te vrolijken of te&nbsp;troosten.
+                        </p>
                     <a href="#concert-aanvragen" class="btn btn-primary btn-large mt-large">Vraag een concert aan</a>
                 </div>
             </div>
@@ -99,7 +173,7 @@
                     <p>We trekken Utrecht in en geven gratis concerten. Vraag voor deze dag een gratis concert aan!</p>
                 </div>
                 <div class="zigzag-media">
-                    <img class="img-shadow zigzag-img" src="../Afbeeldingen/Serenade 1.jpg" alt="Groepsfoto van 10 leden van Sociaal Vocaal." loading="lazy">
+                    <img class="img-shadow zigzag-img" src="../resources/Afbeeldingen/Serenade 1.jpg" alt="Groepsfoto van 10 leden van Sociaal Vocaal." loading="lazy">
                 </div>
             </div>
 
@@ -111,7 +185,7 @@
                     <p>Dit doen we ongeveer twee tot drie keer per jaar door heel Utrecht en omgeving. Je vindt ons zingend in woonkamers, wijkcentra, zorgtehuizen of gewoon op straat.</p>
                 </div>
                 <div class="zigzag-media">
-                    <img class="img-shadow zigzag-img" src="../Afbeeldingen/Repetitie.jpeg" alt="Het koor zit tijdens een repetitie in een cirkel op klapstoeltjes." loading="lazy">
+                    <img class="img-shadow zigzag-img" src="../resources/Afbeeldingen/Repetitie.jpeg" alt="Het koor zit tijdens een repetitie in een cirkel op klapstoeltjes." loading="lazy">
                 </div>
             </div>
         </div>
@@ -178,12 +252,12 @@ Sponsor/Partner Carrousel
         <li class="sponsor-card card-white" role="listitem" aria-roledescription="slide">
             <article class="card-content">
                 <div class="card-media">
-                    <img src="../Afbeeldingen/Sfeerbeeld Digitaal Toegankelijk.JPG" alt="" class="card-afbeelding" loading="lazy">
+                    <img src="../resources/Afbeeldingen/Sfeerbeeld Digitaal Toegankelijk.JPG" alt="" class="card-afbeelding" loading="lazy">
                     <picture class="card-logo">
                         <!-- De browser toont deze afbeelding als de gebruiker donkere modus heeft -->
-                        <source srcset="../Afbeeldingen/DT-logo-primair-licht-zonderAchtergrond.png" alt="Logo Digitaal Toegankelijk" media="(prefers-color-scheme: dark)">
+                        <source srcset="../resources/Afbeeldingen/DT-logo-primair-licht-zonderAchtergrond.png" alt="Logo Digitaal Toegankelijk" media="(prefers-color-scheme: dark)">
                         <!-- De browser toont deze afbeelding in de lichte modus, of als de browser de picture-tag niet snapt -->
-                        <img src="../Afbeeldingen/DT-logo-primair-donker-zonderAchtergrond.png" alt="Logo Digitaal Toegankelijk">
+                        <img src="../resources/Afbeeldingen/DT-logo-primair-donker-zonderAchtergrond.png" alt="Logo Digitaal Toegankelijk">
                     </picture>
                 </div>
                 <div class="card-body">
@@ -199,7 +273,7 @@ Sponsor/Partner Carrousel
         <li class="sponsor-card card-white" role="listitem" aria-roledescription="slide">
             <article class="card-content">
                 <div class="card-media">
-                    <img src="../Afbeeldingen/Kerstoptreden.jpeg" alt="" class="card-afbeelding" loading="lazy">
+                    <img src="../resources/Afbeeldingen/Kerstoptreden.jpeg" alt="" class="card-afbeelding" loading="lazy">
                     <div class="card-logo placeholder-logo">Jouw merk?</div>
                 </div>
                 <div class="card-body">
@@ -378,28 +452,116 @@ Sponsor/Partner Carrousel
     </main>
 
 <footer class="footer">
-    <div class="container">
-        <div class="footer-grid">
+    <nav aria-label="Footer navigatie">
+        
+        <!-- Hoofd-footer in de verbrede container -->
+        <div class="container footer-grid">
+            
+            <!-- Kolom 1: Merk en missie -->
             <div class="footer-brand">
-                <h2>Onze missie</h2>
-                <p>Utrecht verbinden door de kracht van meerstemmige zang. Kleine momenten, grote impact.</p>
-                <h2>Jouw privacy</h2>
-                <p>Je bezoekt deze website anoniem. Er worden geen gegevens over jou verzameld.</p>
+                <h2 class="footer-heading">Sociaal Vocaal</h2>
+                <p class="footer-brand-text">Utrecht verbinden door de kracht van meerstemmige zang. Kleine momenten, grote impact.</p>
+                <div class="mt-large">
+                    <a href="#" class="sitemap-link">
+                        <span class="material-symbols-outlined" aria-hidden="true">account_tree</span>Sitemap
+                    </a>
+                </div>
             </div>
-            <div class="footer-contact">
-                <h2>Contact</h2>
-                <ul>
-                    <li><a href="mailto:sociaalvocaal@outlook.com">Mail: sociaalvocaal@outlook.com</a></li>
+            
+            <!-- Kolom 2: Doe mee -->
+            <div class="footer-nav-col">
+                <h3 class="footer-heading">Doe mee</h3>
+                <ul class="footer-links">
+                    <li><a href="#concert-aanvragen">Gratis concert aanvragen</a></li>
+                    <li><a href="#doe-mee">Zing mee</a></li>
+                    <li><a href="#samenwerken">Samenwerken en steunen</a></li>
+                </ul>
+            </div>
+
+            <!-- Kolom 3: Ontdekken -->
+            <div class="footer-nav-col">
+                <h3 class="footer-heading">Ontdekken</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Agenda</a></li>
+                    <li><a href="#">Onze muziek</a></li>
+                    <li><a href="#ons-verhaal">Over ons</a></li>
+                </ul>
+            </div>
+            
+        <!-- Kolom 4: Contact (Fysiek & Direct met iconen) -->
+            <div class="footer-nav-col">
+                <h3 class="footer-heading">Contact</h3>
+                <ul class="footer-links contact-list">
+                    <li>
+                        <span class="material-symbols-outlined contact-icon" aria-hidden="true">call</span>
+                        <span class="sr-only">Telefoon:</span>
+                        <a href="tel:+00000000000">+00000000000</a>
+                    </li>
+                    <li>
+                        <span class="material-symbols-outlined contact-icon" aria-hidden="true">mail</span>
+                        <span class="sr-only">E-mail:</span>
+                        <a href="mailto:sociaalvocaal@outlook.com" class="long-link">sociaalvocaal@outlook.com</a>
+                    </li>
+                    <li>
+                        <span class="material-symbols-outlined contact-icon" aria-hidden="true">location_on</span>
+                        <span class="sr-only">Adres:</span>
+                        <span>Extralangeadresregel 133<br>3523 XM, Utrecht</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Kolom 5: Sociale media -->
+            <div class="footer-nav-col">
+                <h3 class="footer-heading">Volg ons</h3>
+                <ul class="footer-links">
                     <li>
                         <a href="https://www.instagram.com/sociaal.vocaal/">
-                            <span class="fa fa-instagram" aria-hidden="true"></span> <strong>Instagram</strong>
+                            <span class="fa fa-instagram" aria-hidden="true"></span>
+                            Instagram
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://wa.me/00000000000">
+                            <span class="fa fa-whatsapp" aria-hidden="true"></span>
+                            WhatsApp
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.youtube.com/">
+                            <span class="fa fa-youtube" aria-hidden="true"></span>
+                            YouTube
+                        </a>
+                    </li>                    
+                    <li>
+                        <a href="https://www.linkedin.com/">
+                            <span class="fa fa-linkedin" aria-hidden="true"></span>
+                            LinkedIn
                         </a>
                     </li>
                 </ul>
             </div>
-            <p class="copyright">&copy; 2026 Sociaal Vocaal. Alle rechten voorbehouden.</p>
+            
         </div>
-    </div>
+        
+        <!-- De Bottom Bar -->
+        <div class="footer-bottom">
+            <div class="container footer-bottom-container">
+                <ul class="footer-legal-list">
+                    <li><a href="#">Toegankelijkheidsverklaring</a></li>
+                    <li><a href="#">Cookieverklaring</a></li>
+                    <li><a href="#">Privacyverklaring</a></li>
+                </ul>
+                <div class="footer-meta">
+                    <span>Pagina laatst bijgewerkt op: 21 september 2026</span>
+                    <span>Bijgewerkt door: Peter Teunis</span>
+                </div>
+            </div>
+        </div>
+        
+    </nav>
 </footer>
+
+<script src="app.js"></script>
+
 </body>
 </html>
