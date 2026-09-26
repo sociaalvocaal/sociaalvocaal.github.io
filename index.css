@@ -282,7 +282,7 @@ a:focus-visible, button:focus-visible, input:focus-visible {
     outline-offset: 2px;
 }
 
-/* --- Slim Morphing Logo --- */
+/* --- Statisch Logo --- */
 .logo-link {
     text-decoration: none;
     color: var(--primary);
@@ -292,41 +292,25 @@ a:focus-visible, button:focus-visible, input:focus-visible {
     position: relative;
     display: block;
     height: 2rem; 
+    /* Vaste breedte, geen transities meer */
     width: 11rem; 
-    transition: width 0.4s cubic-bezier(0.25, 1, 0.5, 1);
     font-family: var(--font-heading);
     font-size: clamp(1.25rem, 3vw, 1.5rem);
     font-weight: 700;
 }
 
-.logo-full, .logo-short {
+.logo-full {
     position: absolute;
     left: 0.5rem;
     top: 50%;
-    white-space: nowrap;
-    transition: opacity 0.3s ease, transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-}
-
-.logo-full {
     transform: translateY(-50%);
+    white-space: nowrap;
     opacity: 1;
 }
 
+/* Verwijder .logo-short of laat hem onzichtbaar als hij nog in de HTML staat */
 .logo-short {
-    transform: translateY(100%);
-    opacity: 0;
-}
-
-.floating-pill.is-scrolled .logo-text-container {
-    width: 3rem; 
-}
-.floating-pill.is-scrolled .logo-full {
-    opacity: 0;
-    transform: translateY(-150%); 
-}
-.floating-pill.is-scrolled .logo-short {
-    opacity: 1;
-    transform: translateY(-50%); 
+    display: none;
 }
 
 /* --- Morphing Bento Menu (CSS Grid animatie) --- */
@@ -370,7 +354,12 @@ a:focus-visible, button:focus-visible, input:focus-visible {
 }
 
 .menu-bento-item .menu-heading {
+    font-family: var(--font-heading);
     font-size: 1.125rem;
+    font-weight: 800;
+    color: var(--primary);
+    line-height: 1.2;
+    margin-top: 0;
     margin-bottom: 1rem;
 }
 
@@ -436,6 +425,20 @@ a:focus-visible, button:focus-visible, input:focus-visible {
         top: 1rem;
         bottom: auto;
     }
+}
+
+/* Elegante outline-stijl voor de witte knop in de header */
+.pill-actions .btn-white {
+    background-color: transparent;
+    border: 2px solid var(--primary);
+    color: var(--primary);
+    box-shadow: none; /* Verwijdert de modderige schaduw op de transparante pil */
+}
+
+.pill-actions .btn-white:hover {
+    background-color: var(--primary);
+    color: var(--on-primary);
+    transform: translateY(-1px);
 }
 
 /* ==========================================================================
@@ -749,7 +752,27 @@ picture.card-logo img { width: 100%; height: 100%; object-fit: contain; padding:
     .card-white, .faq-item { background-color: var(--surface-container-high); border: 1px solid var(--surface-container-highest); color: var(--on-surface-variant); }
     .card-white h3 { color: var(--primary); }
     .btn-white { background-color: #e6e6e6; color: #002114; }
-    .skip-link { color: var(--on-primary); --focus-outline-color: var(--on-primary); }
+    /* Skip link & Hub fix in donkere modus */
+    .skip-link { 
+        color: var(--on-primary); 
+        --focus-outline-color: var(--on-primary); 
+    }
+    
+    .skip-links-hub {
+        background-color: var(--surface-container-highest);
+        border-bottom: 1px solid var(--surface-container-high);
+    }
+    
+    .skip-btn {
+        background-color: var(--surface);
+        color: var(--primary);
+        border: 1px solid var(--primary);
+    }
+    
+    .skip-btn:focus-visible {
+        outline: 3px solid var(--primary);
+    }
+
     .card-logo, .placeholder-logo { background-color: var(--surface-container-highest); color: var(--on-surface); }
     img { filter: brightness(0.85) contrast(1.1); }
     .hero-section { background: linear-gradient(135deg, var(--secondary-container) 0%, transparent 65%); }
