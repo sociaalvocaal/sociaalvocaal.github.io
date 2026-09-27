@@ -181,15 +181,12 @@ a:focus-visible, button:focus-visible, input:focus-visible {
     left: 1rem;
     right: 1rem;
     z-index: 100;
-    
     background-color: var(--pill-bg);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    
     border: 1px solid var(--pill-border);
     border-radius: 2.5rem; 
     box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.1);
-    
     overflow: hidden; 
     transition: border-radius 0.4s cubic-bezier(0.25, 1, 0.5, 1), transform 0.4s ease;
 }
@@ -213,185 +210,57 @@ a:focus-visible, button:focus-visible, input:focus-visible {
 
 /* --- Skip-links Hub --- */
 .skip-links-hub {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 0;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: var(--primary);
-    z-index: 10;
+    position: absolute; top: 0; left: 0; right: 0; height: 0; overflow: hidden;
+    display: flex; justify-content: center; align-items: center;
+    background-color: var(--primary); z-index: 10;
 }
-
-.skip-links-hub:focus-within {
-    position: relative;
-    height: auto;
-    padding: 1rem;
-    overflow: visible;
-}
-
-.skip-list {
-    list-style: none;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    padding: 0;
-    margin: 0;
-}
-
-.skip-btn {
-    background-color: #ffffff;
-    color: var(--primary);
-    padding: 0.5rem 1rem;
-    border-radius: var(--radius-sm);
-    font-weight: 700;
-    text-decoration: none;
-}
-.skip-btn:focus-visible {
-    outline: 3px solid #ffffff;
-    outline-offset: 2px;
-}
+.skip-links-hub:focus-within { position: relative; height: auto; padding: 1rem; overflow: visible; }
+.skip-list { list-style: none; display: flex; flex-wrap: wrap; gap: 1rem; padding: 0; margin: 0; }
+.skip-btn { background-color: #ffffff; color: var(--primary); padding: 0.5rem 1rem; border-radius: var(--radius-sm); font-weight: 700; text-decoration: none; }
+.skip-btn:focus-visible { outline: 3px solid #ffffff; outline-offset: 2px; }
 
 /* --- Statisch Logo --- */
-.logo-link {
-    text-decoration: none;
-    color: var(--primary);
-}
-
-.logo-text-container {
-    position: relative;
-    display: block;
-    height: 2rem; 
-    width: 11rem; 
-    font-family: var(--font-heading);
-    font-size: clamp(1.25rem, 3vw, 1.5rem);
-    font-weight: 700;
-}
-
-.logo-full {
-    position: absolute;
-    left: 0.5rem;
-    top: 50%;
-    transform: translateY(-50%);
-    white-space: nowrap;
-    opacity: 1;
-}
-
+.logo-link { text-decoration: none; color: var(--primary); }
+.logo-text-container { position: relative; display: block; height: 2rem; width: 11rem; font-family: var(--font-heading); font-size: clamp(1.25rem, 3vw, 1.5rem); font-weight: 700; }
+.logo-full { position: absolute; left: 0.5rem; top: 50%; transform: translateY(-50%); white-space: nowrap; opacity: 1; }
 .logo-short { display: none; }
 
 /* --- Morphing Bento Menu (CSS Grid animatie) --- */
-.morphing-container {
-    display: grid;
-    grid-template-rows: 0fr;
-    transition: grid-template-rows 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-}
-
+.morphing-container { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.4s cubic-bezier(0.25, 1, 0.5, 1); }
 .floating-pill.is-open .morphing-container { grid-template-rows: 1fr; }
-
-.menu-inner {
-    overflow: hidden;
-    opacity: 0;
-    padding: 0 1.5rem;
-    transition: opacity 0.3s ease, padding 0.3s ease;
-}
-
-.floating-pill.is-open .menu-inner {
-    opacity: 1;
-    padding: 1rem 1.5rem 2rem 1.5rem;
-}
-
-.menu-bento-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1rem;
-}
-
-.menu-bento-item {
-    padding: 1.5rem;
-    border-radius: var(--radius-sm);
-}
-
-.menu-bento-item .menu-heading {
-    font-family: var(--font-heading);
-    font-size: 1.125rem;
-    font-weight: 800;
-    color: var(--primary);
-    line-height: 1.2;
-    margin-top: 0;
-    margin-bottom: 1rem;
-}
-
-.menu-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-}
-
-.menu-list li {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
+.menu-inner { overflow: hidden; opacity: 0; padding: 0 1.5rem; transition: opacity 0.3s ease, padding 0.3s ease; }
+.floating-pill.is-open .menu-inner { opacity: 1; padding: 1rem 1.5rem 2rem 1.5rem; }
+.menu-bento-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; }
+.menu-bento-item { padding: 1.5rem; border-radius: var(--radius-sm); }
+.menu-bento-item .menu-heading { font-family: var(--font-heading); font-size: 1.125rem; font-weight: 800; color: var(--primary); line-height: 1.2; margin-top: 0; margin-bottom: 1rem; }
+.menu-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.75rem; }
+.menu-list li { display: flex; align-items: center; gap: 0.5rem; }
 .menu-list a { font-weight: 500; }
 .menu-list a:hover { color: var(--primary); text-decoration: underline; }
 
 /* --- Menu Knoppen --- */
 .menu-btn {
-    background: var(--surface-container-high);
-    border: none;
-    border-radius: 50%;
-    width: 3rem;
-    height: 3rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    color: var(--primary);
-    transition: background 0.3s ease;
+    background: var(--surface-container-high); border: none; border-radius: 50%;
+    width: 3rem; height: 3rem; display: flex; justify-content: center; align-items: center;
+    cursor: pointer; color: var(--primary); transition: background 0.3s ease;
 }
 .menu-btn:hover { background: var(--surface-container-highest); }
 .menu-btn .icon-close { display: none; }
-
-.floating-pill.is-open .menu-btn {
-    background: var(--primary);
-    color: var(--on-primary);
-}
+.floating-pill.is-open .menu-btn { background: var(--primary); color: var(--on-primary); }
 .floating-pill.is-open .icon-open { display: none; }
 .floating-pill.is-open .icon-close { display: block; }
 
-.pill-actions .btn-white {
-    background-color: transparent;
-    border: 2px solid var(--primary);
-    color: var(--primary);
-    box-shadow: none; 
-}
-.pill-actions .btn-white:hover {
-    background-color: var(--primary);
-    color: var(--on-primary);
-    transform: translateY(-1px);
-}
+.pill-actions .btn-white { background-color: transparent; border: 2px solid var(--primary); color: var(--primary); box-shadow: none; }
+.pill-actions .btn-white:hover { background-color: var(--primary); color: var(--on-primary); transform: translateY(-1px); }
 
 /* ==========================================================================
    DESKTOP OVERRIDES
    ========================================================================== */
 @media (min-width: 768px) {
     .floating-pill {
-        bottom: auto;
-        top: 1.5rem;
-        left: 50%;
-        right: auto;
-        transform: translateX(-50%);
-        width: 100%;
-        max-width: 55rem;
+        bottom: auto; top: 1.5rem; left: 50%; right: auto; transform: translateX(-50%);
+        width: 100%; max-width: 55rem;
     }
-    
     .floating-pill.is-open { border-radius: 1.5rem; }
     .menu-bento-grid { grid-template-columns: repeat(3, 1fr); }
 }
@@ -401,125 +270,209 @@ a:focus-visible, button:focus-visible, input:focus-visible {
 }
 
 /* ==========================================================================
-   MOBIELE OVERNAME: HET AKOESTISCHE PODIUM (Nu veilig onderaan!)
-   ========================================================================== */
-/* ==========================================================================
    MOBIELE OVERNAME: HET AKOESTISCHE PODIUM
    ========================================================================== */
 @media (max-width: 767px) {
-    body { padding-bottom: 6rem; }
+    body { padding-bottom: 7rem; } 
 
+    /* Herstel de padding van de pil zelf */
+    .pill-bar { padding: 0.5rem 1.5rem; }
+
+/* --- De Menuknop (In de opgerolde glazen pil) --- */
+    .menu-btn {
+        width: auto; padding: 0 0.25rem; gap: 0.5rem;
+        background-color: transparent; border: none; box-shadow: none;
+        color: var(--on-surface-variant); 
+        border-radius: 2.5rem; 
+    }
+    
+    .menu-btn .menu-btn-text {
+        position: static !important; width: auto !important; height: auto !important;
+        padding: 0 !important; margin: 0 !important;
+        overflow: visible !important; clip: auto !important;
+        white-space: nowrap !important; font-family: var(--font-body);
+        font-weight: 700; font-size: 1.125rem; 
+    }
+
+    /* FIX: Enkel Touch & Keyboard feedback, de standaard outline van de focusring blijft hierdoor intact */
+    .menu-btn:focus-visible, .menu-btn:active {
+        background-color: transparent; color: var(--primary); 
+    }
+
+    /* 1. De Pil: Omgedraaid én iets opgetild */
     .floating-pill {
-        display: flex;
-        flex-direction: column-reverse; 
-        transition: bottom 0.4s cubic-bezier(0.25, 1, 0.5, 1), 
-                    left 0.4s cubic-bezier(0.25, 1, 0.5, 1), 
-                    right 0.4s cubic-bezier(0.25, 1, 0.5, 1), 
-                    border-radius 0.4s ease;
+        bottom: 2rem; display: flex; flex-direction: column-reverse; 
+        transition: bottom 0.4s cubic-bezier(0.25, 1, 0.5, 1), left 0.4s cubic-bezier(0.25, 1, 0.5, 1), right 0.4s cubic-bezier(0.25, 1, 0.5, 1), border-radius 0.4s ease, box-shadow 0.4s ease;
+        box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.1); 
     }
 
     .floating-pill.is-open {
-        bottom: 0; left: 0; right: 0;
-        border-radius: 0; border-top: none;
+        bottom: 0; left: 0; right: 0; border-radius: 0; border-top: none;
+        padding-bottom: 2rem; box-shadow: none; 
     }
 
     .floating-pill.is-open .menu-inner {
-        height: calc(100dvh - 4.5rem); 
-        display: flex; flex-direction: column; justify-content: center;
-        padding: 0 1.5rem; overflow-y: auto;
+        height: calc(100dvh - 4.5rem - 2rem); display: flex; flex-direction: column; justify-content: center;
+        padding: 0; overflow-y: auto;
     }
 
+    /* 2. Bento Reset & Proximity Uitlijning */
     .menu-bento-grid {
-        display: flex; flex-direction: column; gap: 1.5rem; width: 100%;
+        display: flex; flex-direction: column; gap: 1.5rem; width: 100%; padding: 0 1.5rem; 
     }
 
     .menu-bento-item.card-white {
-        background: transparent; border: none; box-shadow: none; padding: 0; 
-        text-align: left; /* FIX: Strak links uitgelijnd voor betere leesbaarheid */
+        background: transparent; border: none; box-shadow: none; padding: 0; text-align: left; 
     }
 
-    .menu-bento-item .menu-heading {
-        display: flex; align-items: center; justify-content: space-between; /* Ruimte voor de pijl */
-        font-size: clamp(2rem, 8vw, 2.75rem); /* FIX: Geschaalde, rustigere typografie */
-        line-height: 1.2; margin: 0; cursor: pointer;
-        transition: transform 0.2s ease, opacity 0.3s ease; 
+.menu-bento-item .menu-heading {
+        display: flex; align-items: center; justify-content: flex-start; gap: 0.5rem;
+        font-size: clamp(2rem, 8vw, 2.75rem); line-height: 1.2; margin: 0 0 0 0.5rem; cursor: pointer;
+        /* FIX: Transition op de heading zélf, zodat scale soepel loopt */
+        transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.3s ease; 
     }
     
-    /* FIX: Subtiele indicatie-pijl toevoegen via CSS */
     .menu-bento-item .menu-heading::after {
-        content: "arrow_forward";
-        font-family: 'Material Symbols Outlined';
-        font-size: 2rem;
-        font-weight: 300;
-        color: var(--primary);
-        transition: opacity 0.3s ease;
+        content: "arrow_forward"; font-family: 'Material Symbols Outlined'; font-size: 2rem; font-weight: 300;
+        color: var(--primary); 
+        /* FIX: Transition op het pijltje toegevoegd */
+        transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.3s ease;
     }
 
+    /* Tactiele druk + Pijltje schuift op */
     .menu-bento-item .menu-heading:active { transform: scale(0.98); }
+    .menu-bento-item .menu-heading:active::after { transform: translateX(6px); }
 
     .menu-list { display: none; }
     .menu-bento-item.is-hidden { display: none; }
     
     .menu-bento-item.is-active .menu-heading {
-        font-size: 1.5rem; margin-bottom: 1.5rem; cursor: default;
-        color: var(--on-surface-variant); opacity: 0.8;
-        pointer-events: none; /* Maakt de kop veilig onklikbaar als hij een titel is */
+        font-size: 1.5rem; margin-bottom: 1rem; cursor: default;
+        color: var(--primary); opacity: 1; pointer-events: none; 
     }
-    .menu-bento-item.is-active .menu-heading:active { transform: none; }
     
-    /* Verberg de pijl als je in het submenu zit */
+    .menu-bento-item.is-active .menu-heading:active { transform: none; }
     .menu-bento-item.is-active .menu-heading::after { display: none; }
     
+    /* 3. Massieve Touch-Rows met Tactiele Feedback */
     .menu-bento-item.is-active .menu-list {
-        display: flex; flex-direction: column; gap: 0;
+        display: flex; flex-direction: column; gap: 0; margin: 0; 
         animation: fadeInLinks 0.4s cubic-bezier(0.25, 1, 0.5, 1) forwards;
     }
 
     .menu-bento-item.is-active .menu-list a {
-        display: block; padding: 1.25rem 0; font-size: 1.25rem;
-        border-bottom: 1px solid var(--surface-container-high); color: var(--on-surface);
-        text-decoration: none;
+        display: block; padding: 1.25rem 0.5rem; font-size: 1.25rem;
+        border-bottom: 1px solid var(--surface-container-high); color: var(--on-surface); text-decoration: none;
+        /* FIX: Vloeiende overgang voor de achtergrond, tekstkleur én de inspringing (transform) */
+        transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s cubic-bezier(0.25, 1, 0.5, 1);
     }
+    
+    .menu-bento-item.is-active .menu-list a:active, 
+    .menu-bento-item.is-active .menu-list a:focus-visible {
+        background-color: var(--surface-container-high);
+        /* FIX: Tactiele indentatie en kleurwijziging bij interactie */
+        color: var(--primary);
+        transform: translateX(4px);
+    }
+    
     .menu-bento-item.is-active .menu-list li:last-child a { border-bottom: none; }
     
-/* De JS geïnjecteerde Terug-knop (Nu onderin geplaatst voor duim-navigatie) */
-    .menu-back-btn {
-        display: none; 
-    }
+/* 4. Het Symmetrische Stuurwiel & Knoppen (Structureel Ontwerp) */
+    .menu-back-btn { display: none; }
 
-    .menu-back-btn:not([hidden]) {
-        display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
-        background: var(--surface-container-high); border: none; border-radius: 2rem;
-        color: var(--on-surface-variant); font-weight: 700; font-size: 1rem;
-        padding: 0.5rem 1rem; margin: 0; cursor: pointer;
+    /* Architectonische basis voor BEIDE stuurwiel-knoppen */
+    .menu-back-btn:not([hidden]), 
+    .floating-pill.is-open .menu-btn {
+        display: inline-flex; align-items: center; justify-content: center; 
+        gap: 0.35rem; 
+        border-radius: 2.5rem; 
+        height: 3.5rem; 
+        padding: 0 1.5rem; margin: 0; cursor: pointer;
+        font-family: var(--font-body); font-weight: 700; font-size: 1.125rem;
+        /* FIX: Uniforme, vloeiende animatie voor kleur, achtergrond én indrukken voor beide knoppen! */
+        transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s cubic-bezier(0.25, 1, 0.5, 1);
         animation: fadeInLinks 0.4s cubic-bezier(0.25, 1, 0.5, 1) forwards;
     }
-    .menu-back-btn:not([hidden]):focus-visible, .menu-back-btn:not([hidden]):hover { 
+
+    /* --- DE TERUG-KNOP (Licht naar Donker) --- */
+    .menu-back-btn:not([hidden]) {
+        background-color: var(--surface); 
+        border: 2px solid var(--primary); 
+        box-shadow: none; 
         color: var(--primary); 
     }
+    
+    .menu-back-btn:not([hidden]):focus-visible, 
+    .menu-back-btn:not([hidden]):active { 
+        background-color: var(--primary); 
+        color: var(--on-primary); 
     }
-    .menu-back-btn:hover { color: var(--primary); }
 
+    /* --- DE SLUIT-KNOP (Donker naar Licht) --- */
+    .floating-pill.is-open .menu-btn {
+        background-color: var(--primary); 
+        color: var(--on-primary); 
+        border: 2px solid var(--primary); 
+        box-shadow: none;
+    }
+    
+    .floating-pill.is-open .menu-btn:focus-visible,
+    .floating-pill.is-open .menu-btn:active {
+        background-color: var(--surface); /* FIX: Spiegel-inversie! */
+        color: var(--primary);
+        opacity: 1; /* Oude, vage opacity-regel overschreven */
+    }
+
+    /* FIX: Tactiele fysieke druk voor BEIDE knoppen (alleen bij fysiek aanraken, niet bij Tab-focus) */
+    .menu-back-btn:not([hidden]):active,
+    .floating-pill.is-open .menu-btn:active {
+        transform: scale(0.96);
+    }
+
+    /* ==========================================================================
+       WCAG FIX: Muis-afhankelijke Hover States (Geïsoleerd blok)
+       ========================================================================== */
+    @media (hover: hover) {
+        /* De transparante menu-knop in gesloten pil */
+        .menu-btn:hover { background-color: transparent; color: var(--primary); }
+        
+        /* Tactiele indentatie submenu */
+        .menu-bento-item.is-active .menu-list a:hover { 
+            background-color: var(--surface-container-high); 
+            color: var(--primary);
+            transform: translateX(4px);
+        }
+
+        /* Micro-animatie pijl van hoofdkoppen */
+        .menu-bento-item .menu-heading:hover::after { transform: translateX(6px); }
+
+        /* Stuurwiel spiegel-effect bij hover */
+        .menu-back-btn:not([hidden]):hover { 
+            background-color: var(--primary); 
+            color: var(--on-primary); 
+        }
+        .floating-pill.is-open .menu-btn:hover { 
+            background-color: var(--surface); 
+            color: var(--primary); 
+            opacity: 1; 
+        }
+    }
+    
     @keyframes fadeInLinks {
         from { opacity: 0; transform: translateY(15px); }
         to { opacity: 1; transform: translateY(0); }
     }
-/* 5. Logo naar de top sturen bij geopend menu */
-    .floating-pill.is-open .logo-text-container {
-        position: fixed;
-        top: 2rem;
-        left: 50%;
-        transform: translateX(-50%);
-        width: max-content;
-        z-index: 101; /* Blijft netjes boven het bento-grid zweven */
+
+    /* 5. Logo als Home-knop naar linksboven */
+    .floating-pill.is-open .logo-link {
+        position: absolute; top: 2.5rem; left: 1.5rem; z-index: 101; 
         animation: fadeInLinks 0.4s cubic-bezier(0.25, 1, 0.5, 1) forwards;
     }
 
-    /* Omdat het logo nu gefixeerd is in het midden, moeten we voorkomen dat in opgerolde status 
-       de logo-tekst het 'Terug' knopje aan de linkerkant plet */
-    .floating-pill.is-open .pill-bar {
-        justify-content: flex-end; /* Duw de 'Terug' knop en de sluitknop naar rechts */
-    }
+    .floating-pill.is-open .pill-bar { justify-content: center; }
+    .floating-pill.is-open .pill-actions { width: 100%; justify-content: center; gap: 0.5rem; }
+    .menu-back-btn:not([hidden]), .floating-pill.is-open .menu-btn { flex: 1; max-width: 12rem; }
+}
 
 /* --- Toegankelijkheid & Reflow --- */
 @media (prefers-reduced-motion: reduce) {
@@ -529,6 +482,7 @@ a:focus-visible, button:focus-visible, input:focus-visible {
 @media (max-height: 400px) {
     .floating-pill { position: absolute; top: 1rem; bottom: auto; }
 }
+
 /* ==========================================================================
    2. KNOPPEN & CALL TO ACTIONS
    ========================================================================== */
