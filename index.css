@@ -306,9 +306,11 @@ a:focus-visible, button:focus-visible, input:focus-visible {
         box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.1); 
     }
 
-    .floating-pill.is-open {
+.floating-pill.is-open {
         bottom: 0; left: 0; right: 0; border-radius: 0; border-top: none;
-        padding-bottom: 2rem; box-shadow: none; 
+        /* FIX: De 'env()' functie telt de fysieke scherminkeping (zoals de iPhone home-bar) op bij onze 2rem padding */
+        padding-bottom: calc(2rem + env(safe-area-inset-bottom, 0px)); 
+        box-shadow: none; 
     }
 
     .floating-pill.is-open .menu-inner {
@@ -457,7 +459,7 @@ a:focus-visible, button:focus-visible, input:focus-visible {
             opacity: 1; 
         }
     }
-    
+
     @keyframes fadeInLinks {
         from { opacity: 0; transform: translateY(15px); }
         to { opacity: 1; transform: translateY(0); }
@@ -479,8 +481,108 @@ a:focus-visible, button:focus-visible, input:focus-visible {
     .floating-pill, .logo-text-container, .logo-full, .logo-short, .morphing-container { transition: none !important; }
 }
 
-@media (max-height: 400px) {
-    .floating-pill { position: absolute; top: 1rem; bottom: auto; }
+/* ==========================================================================
+   WCAG FIX: Landscape & Reflow (Schermen met beperkte hoogte)
+   ========================================================================== */
+@media (max-width: 767px) and (max-height: 500px) and (orientation: landscape) {
+    /* 1. De Veilige Container (Fix de Scroll Lock) */
+    .floating-pill.is-open {
+        position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
+        border-radius: 0;
+        padding-bottom: env(safe-area-inset-bottom, 0px);
+        display: flex;
+        flex-direction: column-reverse; 
+        box-shadow: none;
+    }
+
+    /* 2. Het Verankerde Stuurwiel (De balk aan de onderkant) */
+    .floating-pill.is-open .pill-bar {
+        position: relative;
+        height: auto;
+        padding: 0.75rem 1.5rem;
+        background-color: var(--surface-container-highest);
+        width: 100%;
+        /* FIX: CSS Grid voor perfecte ambidextrous centrering */
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+        align-items: center;
+    }
+
+    .floating-pill.is-open .logo-link {
+        position: static;
+        animation: none;
+        display: flex;
+        align-items: center;
+        grid-column: 1;
+        justify-self: start; 
+    }
+
+    .floating-pill.is-open .pill-actions {
+        width: auto;
+        grid-column: 2;
+        justify-content: center; 
+        gap: 0.5rem; /* Zorgt dat de knoppen strak als één eenheid bij elkaar staan */
+    }
+
+    /* 3. Het Akoestische Canvas (Scrollbaar binnengebied) */
+    .floating-pill.is-open .morphing-container {
+        flex: 1; 
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden; 
+    }
+
+    .floating-pill.is-open .menu-inner {
+        flex: 1;
+        height: auto;
+        overflow-y: auto; 
+        justify-content: flex-start; 
+        padding: 1.5rem 1.5rem 2rem 1.5rem; 
+    }
+
+    /* 4. Ononderbroken, 1-kolom leeslijn voor reflow/zoom */
+    .menu-bento-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .menu-bento-item {
+        padding: 0;
+    }
+
+    /* 5. Typografie (Exact 1 typescale kleiner) */
+    .menu-bento-item .menu-heading {
+        font-size: 1.5rem; 
+        margin-bottom: 0.5rem; 
+    }
+    
+    .menu-bento-item .menu-heading::after {
+        font-size: 1.5rem; 
+    }
+
+    .menu-bento-item.is-active .menu-heading {
+        font-size: 1.25rem; 
+        margin-bottom: 0.5rem;
+    }
+
+    /* WCAG 2.5.5 touch targets met proportionele tekst */
+    .menu-bento-item.is-active .menu-list a {
+        font-size: 1.125rem; 
+        padding: 0.5rem 0.5rem; 
+        min-height: 44px; 
+        display: flex;
+        align-items: center;
+    }
+
+    .menu-back-btn:not([hidden]), 
+    .floating-pill.is-open .menu-btn {
+        height: 3rem; 
+        font-size: 1.125rem;
+        padding: 0 1.25rem;
+    }
 }
 
 /* ==========================================================================

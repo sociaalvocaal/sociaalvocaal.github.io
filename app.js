@@ -183,12 +183,19 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.key === 'Tab' && header.classList.contains('is-open')) {
             // 1. Bouw de VISUELE volgorde op in een array
             let focusableElements = [];
+            const isLandscape = window.innerWidth < 768 && window.innerHeight <= 500;
             
-            if (isElementVisible(logoLink)) focusableElements.push(logoLink);
+            // In portretmodus: Logo staat visueel bovenaan
+            if (!isLandscape && isElementVisible(logoLink)) focusableElements.push(logoLink);
             
+            // Het scrolbare binnengebied (Menu items)
             const menuItems = Array.from(morphingMenu.querySelectorAll('a, button, [role="button"]'));
             menuItems.filter(isElementVisible).forEach(el => focusableElements.push(el));
             
+            // In landscape-modus: Logo is verhuisd naar de balk onderaan
+            if (isLandscape && isElementVisible(logoLink)) focusableElements.push(logoLink);
+            
+            // De knoppen in de balk onderaan
             if (isElementVisible(backBtn)) focusableElements.push(backBtn);
             if (isElementVisible(menuBtn)) focusableElements.push(menuBtn);
             
