@@ -74,7 +74,7 @@
                     <ul class="menu-list" aria-labelledby="menu-ontdekken">
                         <li><a href="#">Agenda</a></li>
                         <li><a href="#">Onze muziek</a></li>
-                        <li><a href="#ons-verhaal">Over ons</a></li>
+                        <li><a href="#ons-verhaal">Ons verhaal</a></li>
                     </ul>
                 </div>
                 
@@ -93,7 +93,7 @@
     
 </header>
 
-    <main id="hoofdinhoud">
+    <main id="hoofdinhoud" tabindex="-1">
         <section class="hero-section section-padding">
             <div class="container">
                 <div class="hero-content">
@@ -108,12 +108,12 @@
             </div>
         </section>
 
-    <section id="doe-mee" class="bg-surface-low section-padding">
+    <section id="doe-mee" class="bg-surface-low section-padding" tabindex="-1">
         <div class="container max-w-content">
             
             <div class="bento-item card-primary mb-large">
                 <h2>Zing mee met ons koor</h2>
-                <p>We zoeken vooral <strong>sopranen, tenoren, baritons, bassen en vocale percussionisten</strong>. Ervaring met meerstemmig zingen is een pré.</p> 
+                <p>We zoeken vooral hoge stemmen (sopranen, tenoren), lage stemmen (baritons, bassen) en vocale percussionisten</bold>.</p> 
                 <p>We repeteren tweewelijks. Bij ons is ruimte om:</p>
                 <ul class="check-list mt-large">
                     <li><span class="material-symbols-outlined" aria-hidden="true">music_note</span> Eigen arrangementen aan te dragen</li>
@@ -128,7 +128,7 @@
       </section>
 
 <!-- Onze muzikale impact -->
-    <section id="onze-impact" class="container section-padding">
+    <section id="onze-impact" class="container section-padding" tabindex="-1">
         <div class="max-w-content">
             <h2>Onze muzikale impact</h2>
             <p>Sinds ons eerste optreden op 3 januari 2026, gaven we:</p>
@@ -170,7 +170,7 @@
                     <p>We trekken Utrecht in en geven gratis concerten. Vraag voor deze dag een gratis concert aan!</p>
                 </div>
                 <div class="zigzag-media">
-                    <img class="img-shadow zigzag-img" src="../Afbeeldingen/Serenade 1.jpg" alt="Groepsfoto van 10 leden van Sociaal Vocaal." loading="lazy">
+                    <img class="img-shadow zigzag-img" src="../resources/Afbeeldingen/Serenade 1.jpg" alt="Groepsfoto van 10 leden van Sociaal Vocaal." loading="lazy">
                 </div>
             </div>
 
@@ -182,13 +182,13 @@
                     <p>Dit doen we ongeveer twee tot drie keer per jaar door heel Utrecht en omgeving. Je vindt ons zingend in woonkamers, wijkcentra, zorgtehuizen of gewoon op straat.</p>
                 </div>
                 <div class="zigzag-media">
-                    <img class="img-shadow zigzag-img" src="../Afbeeldingen/Repetitie.jpeg" alt="Het koor zit tijdens een repetitie in een cirkel op klapstoeltjes." loading="lazy">
+                    <img class="img-shadow zigzag-img" src="../resources/Afbeeldingen/Repetitie.jpeg" alt="Het koor zit tijdens een repetitie in een cirkel op klapstoeltjes." loading="lazy">
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="ons-verhaal" class="container section-padding">
+    <section id="ons-verhaal" class="container section-padding" tabindex="-1">
         <div class="max-w-content">
             <h2>Ons verhaal</h2>
             <p>Sociaal Vocaal is in september 2025 door <a href="https://www.linkedin.com/in/robbert-kapitein-44b757111/" class="text-link">Robbert Kapitein</a> tot leven gewekt. Na jaren bij het <a href="https://www.dekoor.nl/" class="text-link">Utrechtse studentenkoor Dekoor Close Harmony</a>, groeide de behoefte om muziek directer in te zetten voor de maatschappij. Geen grote zalen en wereldpodiums, maar directe verbinding met de mensen voor wie ze het deden.</p>
@@ -198,7 +198,7 @@
 
 
 
-    <section id="samenwerken" class="bg-surface-low section-padding">
+    <section id="samenwerken" class="bg-surface-low section-padding" tabindex="-1">
           <div class="container">
               <div class="mb-large">
                   <h2>Werk met ons samen</h2>
@@ -231,13 +231,24 @@
 Sponsor/Partner Carrousel
 ========================================================================== -->
 
-    <section class="sponsor-sectie section-padding" aria-labelledby="sponsor-titel">
-    <div class="container">
-        <div class="sponsor-header mb-large">
-            <h2 id="sponsor-titel">Onze partners</h2>
-            <p>Deze organisaties maken ons bestaan mogelijk en helpen ons blijven groeien.</p>
+<section class="sponsor-sectie section-padding" aria-labelledby="sponsor-titel">
+        <!-- De container is weer teruggeplaatst -->
+        <div class="container">
+            <div class="sponsor-header mb-large">
+                <h2 id="sponsor-titel">Onze partners</h2>
+                <p class="sponsor-description">Deze organisaties maken ons bestaan mogelijk en helpen ons blijven groeien.</p>
+                
+                <!-- Progressieve verrijking: verborgen totdat JS laadt -->
+                <div class="carousel-controls" hidden>
+                    <button type="button" class="carousel-btn prev-btn" aria-label="Vorige partners" disabled>
+                        <span class="material-symbols-outlined" aria-hidden="true">arrow_back</span>
+                    </button>
+                    <button type="button" class="carousel-btn next-btn" aria-label="Volgende partners">
+                        <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
+                    </button>
+                </div>
+            </div> 
         </div>
-    </div>
 
     <ul class="sponsor-track" 
         role="list" 
@@ -249,12 +260,12 @@ Sponsor/Partner Carrousel
         <li class="sponsor-card card-white" role="listitem" aria-roledescription="slide">
             <article class="card-content">
                 <div class="card-media">
-                    <img src="../Afbeeldingen/Sfeerbeeld Digitaal Toegankelijk.JPG" alt="" class="card-afbeelding" loading="lazy">
+                    <img src="../resources/Afbeeldingen/Sfeerbeeld Digitaal Toegankelijk.JPG" alt="" class="card-afbeelding" loading="lazy">
                     <picture class="card-logo">
                         <!-- De browser toont deze afbeelding als de gebruiker donkere modus heeft -->
-                        <source srcset="../Afbeeldingen/DT-logo-primair-licht-zonderAchtergrond.png" alt="Logo Digitaal Toegankelijk" media="(prefers-color-scheme: dark)">
+                        <source srcset="../resources/Afbeeldingen/DT-logo-primair-licht-zonderAchtergrond.png" alt="Logo Digitaal Toegankelijk" media="(prefers-color-scheme: dark)">
                         <!-- De browser toont deze afbeelding in de lichte modus, of als de browser de picture-tag niet snapt -->
-                        <img src="../Afbeeldingen/DT-logo-primair-donker-zonderAchtergrond.png" alt="Logo Digitaal Toegankelijk">
+                        <img src="../resources/Afbeeldingen/DT-logo-primair-donker-zonderAchtergrond.png" alt="Logo Digitaal Toegankelijk">
                     </picture>
                 </div>
                 <div class="card-body">
@@ -270,7 +281,7 @@ Sponsor/Partner Carrousel
         <li class="sponsor-card card-white" role="listitem" aria-roledescription="slide">
             <article class="card-content">
                 <div class="card-media">
-                    <img src="../Afbeeldingen/Kerstoptreden.jpeg" alt="" class="card-afbeelding" loading="lazy">
+                    <img src="../resources/Afbeeldingen/Kerstoptreden.jpeg" alt="" class="card-afbeelding" loading="lazy">
                     <div class="card-logo placeholder-logo">Jouw merk?</div>
                 </div>
                 <div class="card-body">
@@ -281,7 +292,58 @@ Sponsor/Partner Carrousel
                 </div>
             </article>
         </li>
+
+                <!-- Kaart 2: Werving nieuwe partners (kopie, voor de test)-->
+        <li class="sponsor-card card-white" role="listitem" aria-roledescription="slide">
+            <article class="card-content">
+                <div class="card-media">
+                    <img src="../resources/Afbeeldingen/Kerstoptreden.jpeg" alt="" class="card-afbeelding" loading="lazy">
+                    <div class="card-logo placeholder-logo">Jouw merk?</div>
+                </div>
+                <div class="card-body">
+                    <h3 class="card-titel">Word onze partner, please</h3>
+                    <span class="card-tagline font-bold text-primary">Samen maken we muzikale impact</span>
+                    <p class="card-tekst">Als bedrijf of fonds kun je ons helpen om gratis serenades te blijven geven aan mensen die het verdienen. In ruil daarvoor bieden we jouw merk graag een podium op onze website en kanalen.</p>
+                    <a href="mailto:sociaalvocaal@outlook.com" class="btn btn-primary btn-small card-cta">Mail ons</a>
+                </div>
+            </article>
+        </li>
+        
+        <!-- Kaart 2: Werving nieuwe partners (kopie, voor de test) -->
+        <li class="sponsor-card card-white" role="listitem" aria-roledescription="slide">
+            <article class="card-content">
+                <div class="card-media">
+                    <img src="../resources/Afbeeldingen/Kerstoptreden.jpeg" alt="" class="card-afbeelding" loading="lazy">
+                    <div class="card-logo placeholder-logo">Jouw merk?</div>
+                </div>
+                <div class="card-body">
+                    <h3 class="card-titel">Word onze partner, pretty pretty please</h3>
+                    <span class="card-tagline font-bold text-primary">Samen maken we muzikale impact</span>
+                    <p class="card-tekst">Als bedrijf of fonds kun je ons helpen om gratis serenades te blijven geven aan mensen die het verdienen. In ruil daarvoor bieden we jouw merk graag een podium op onze website en kanalen.</p>
+                    <a href="mailto:sociaalvocaal@outlook.com" class="btn btn-primary btn-small card-cta">Mail ons</a>
+                </div>
+            </article>
+        </li>
+
+                <!-- Kaart 2: Werving nieuwe partners (kopie, voor de test)-->
+        <li class="sponsor-card card-white" role="listitem" aria-roledescription="slide">
+            <article class="card-content">
+                <div class="card-media">
+                    <img src="../resources/Afbeeldingen/Kerstoptreden.jpeg" alt="" class="card-afbeelding" loading="lazy">
+                    <div class="card-logo placeholder-logo">Jouw merk?</div>
+                </div>
+                <div class="card-body">
+                    <h3 class="card-titel">Word onze partner, of we gaan vals zingen</h3>
+                    <span class="card-tagline font-bold text-primary">Samen maken we muzikale impact</span>
+                    <p class="card-tekst">Als bedrijf of fonds kun je ons helpen om gratis serenades te blijven geven aan mensen die het verdienen. In ruil daarvoor bieden we jouw merk graag een podium op onze website en kanalen.</p>
+                    <a href="mailto:sociaalvocaal@outlook.com" class="btn btn-primary btn-small card-cta">Mail ons</a>
+                </div>
+            </article>
+        </li>
+        
+
     </ul>
+
     </section>
 
     <section class="bg-surface-low section-padding faq-section">
@@ -438,7 +500,7 @@ Sponsor/Partner Carrousel
         </div>
     </section>
 
-        <section id="concert-aanvragen" class="container section-padding pb-large">
+        <section id="concert-aanvragen" class="container section-padding pb-large" tabindex="-1">
             <div class="cta-box card-primary">
                 <h2>Concert aanvragen</h2>
                 <p>Wil je iemand verrassen of een organisatie in het zonnetje zetten? We zijn benieuwd naar jouw verhaal.</p>
@@ -481,7 +543,7 @@ Sponsor/Partner Carrousel
                 <ul class="footer-links">
                     <li><a href="#">Agenda</a></li>
                     <li><a href="#">Onze muziek</a></li>
-                    <li><a href="#ons-verhaal">Over ons</a></li>
+                    <li><a href="#ons-verhaal">Ons verhaal</a></li>
                 </ul>
             </div>
             

@@ -60,6 +60,29 @@ body {
 }
 
 /* ==========================================================================
+   Scroll-gedrag en Active Focus (:target)
+   ========================================================================== */
+html {
+    scroll-behavior: smooth;
+    /* Mobiel: De header staat onderaan, dus bovenaan hebben we slechts lichte ademruimte nodig */
+    scroll-padding-top: 2rem; 
+}
+
+/* Desktop: Hier zweeft de pil bovenaan (top: 1.5rem + hoogte), we creëren een 'safe zone' */
+@media (min-width: 768px) {
+    html {
+        scroll-padding-top: 8rem; 
+    }
+}
+
+/* Toegankelijkheid: Vloeiend scrollen uitschakelen bij prikkelgevoeligheid */
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+}
+
+/* ==========================================================================
    Typografie
    ========================================================================== */
 h1, h2, h3, h4, .logo {
@@ -131,6 +154,31 @@ a:focus-visible, button:focus-visible, input:focus-visible {
 /* Zorgt dat de outline naar binnen valt, anders snijdt de viewport hem af */
 .skip-link:focus-visible {
     outline-offset: -3px; 
+}
+
+/* Het ankerdoel in actieve status */
+:target {
+    /* Reset de standaard (blijvende) browser focusring voor dit element */
+    outline: none;
+    /* Start een eenmalige, zachte 'glow & fade' animatie van 2.5 seconden */
+    animation: targetGlow 2.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+/* De animatie ademt mee met de Sociaal Vocaal huisstijl */
+@keyframes targetGlow {
+    0%, 20% { 
+        /* Gelijk aan je eigen button-focus stijlen, maar de outline valt naar binnen om scrollbars te voorkomen */
+        outline: 3px solid var(--primary); 
+        outline-offset: -3px; 
+        border-radius: var(--radius-md); 
+        background-color: var(--surface-container-high);
+    }
+    100% { 
+        outline: 3px solid transparent; 
+        outline-offset: -3px; 
+        border-radius: var(--radius-md);
+        background-color: transparent;
+    }
 }
 
 /* ==========================================================================
@@ -766,11 +814,33 @@ a:focus-visible, button:focus-visible, input:focus-visible {
 .faq-summary {
     display: flex; justify-content: space-between; align-items: center; gap: var(--space-sm);
     padding: 1.5rem; cursor: pointer; list-style: none; border-radius: var(--radius-sm);
+    /* NIEUW: Vloeiende overgang voor achtergrondkleur en afronding toegevoegd */
+    transition: background-color 0.2s ease, outline 0.2s ease, border-radius 0.2s ease;
 }
+
 .faq-summary::-webkit-details-marker { display: none; }
-.faq-summary:focus-visible {
-    outline: 3px solid var(--focus-outline-color); outline-offset: -3px; background-color: var(--surface-container-low);
+
+/* NIEUW: Duidelijke hover state voor de gehele klikbare balk */
+@media (hover: hover) {
+    .faq-summary:hover {
+        background-color: var(--surface-container-low);
+    }
 }
+
+/* AANGEPAST: Focus state duidelijker gemaakt in lijn met hover */
+.faq-summary:focus-visible {
+    outline: 3px solid var(--focus-outline-color); 
+    outline-offset: -3px; 
+    background-color: var(--surface-container-high);
+}
+
+/* NIEUW: Visuele strakheid behouden als het paneel open is (voorkomt zwevend pil-effect bij openklappen) */
+details[open] .faq-summary:hover,
+details[open] .faq-summary:focus-visible {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
 .faq-summary h4 { margin: 0; font-size: clamp(1.15rem, 2vw, 1.25rem); line-height: 1.3; }
 
 .faq-sub-content h5 { font-family: var(--font-heading); font-size: 1.25rem; font-weight: 700; margin-top: 0; margin-bottom: var(--space-xs); }
@@ -832,17 +902,52 @@ details[open] .faq-content {
 /* ==========================================================================
    Horizontal Card Carousel (Partners/Sponsors)
    ========================================================================== */
-.sponsor-track {
-    display: flex; gap: var(--space-md); overflow-x: auto; scroll-snap-type: x mandatory;
-    padding-inline: 1.5rem; scroll-padding-inline: 1.5rem; padding-block: 1rem var(--space-md); 
-    scrollbar-color: var(--primary) var(--surface-container-low); scrollbar-width: thin;
+.sponsor-sectie {
+    display: grid;
+    /* Architectuur: 3 kolommen (1. linker marge, 2. content max 55rem, 3. rechter marge) */
+    grid-template-columns: minmax(1.5rem, 1fr) minmax(0, 55rem) minmax(1.5rem, 1fr);
 }
-@media(min-width: 55rem) { .sponsor-track { padding-inline: calc((100% - 55rem) / 2); scroll-padding-inline: calc((100% - 55rem) / 2); } }
-@media (prefers-reduced-motion: no-preference) { .sponsor-track { scroll-behavior: smooth; } }
+
+.sponsor-sectie > .container {
+    grid-column: 2; /* Plaats de header strak in de middelste content-kolom */
+    padding: 0; /* De padding wordt nu native opgevangen door de grid kolommen */
+    width: 100%;
+}
+
+.sponsor-track {
+    /* HET TRUCJE: Start gelijk met tekst (kolom 2), span tot de uiterste rechterschermrand (-1) */
+    grid-column: 2 / -1; 
+    display: flex; 
+    gap: var(--space-md); 
+    overflow-x: auto; 
+    scroll-snap-type: x mandatory;
+    padding-block: 1rem var(--space-md); 
+    padding-inline: 0 1.5rem; /* Alleen rechts ademruimte nodig, links is geregeld door Grid */
+    scroll-padding-inline: 0;
+    scrollbar-color: var(--primary) var(--surface-container-low); 
+    scrollbar-width: thin;
+}
+
+@media (prefers-reduced-motion: no-preference) { 
+    .sponsor-track { scroll-behavior: smooth; } 
+}
+
+/* De opgeschoonde WebKit scrollbar styling (Geen onbetrouwbare marges meer nodig!) */
 .sponsor-track::-webkit-scrollbar { height: 12px; }
-.sponsor-track::-webkit-scrollbar-track { background: var(--surface-container-low); border-radius: var(--radius-sm); }
-.sponsor-track::-webkit-scrollbar-thumb { background-color: var(--primary); border-radius: var(--radius-sm); border: 3px solid var(--surface-container-low); }
-.sponsor-track:focus-visible { outline: 3px solid var(--focus-outline-color); outline-offset: -3px; border-radius: var(--radius-sm); }
+.sponsor-track::-webkit-scrollbar-track { 
+    background: var(--surface-container-low); 
+    border-radius: var(--radius-sm); 
+}
+.sponsor-track::-webkit-scrollbar-thumb { 
+    background-color: var(--primary); 
+    border-radius: var(--radius-sm); 
+    border: 3px solid var(--surface-container-low); 
+}
+.sponsor-track:focus-visible { 
+    outline: 3px solid var(--focus-outline-color); 
+    outline-offset: -3px; 
+    border-radius: var(--radius-sm); 
+}
 
 .sponsor-card { flex: 0 0 85%; max-width: 380px; min-height: 100%; scroll-snap-align: start; border-radius: var(--radius-md); display: flex; flex-direction: column; }
 .card-content { display: flex; flex-direction: column; flex-grow: 1; }
@@ -865,6 +970,111 @@ picture.card-logo img { width: 100%; height: 100%; object-fit: contain; padding:
 
 .text-primary { color: var(--primary); }
 .font-bold { font-weight: 700; }
+
+/* Carousel Header layout & Knoppen */
+.sponsor-header {
+    display: grid;
+    grid-template-columns: 1fr auto; /* Titel pakt de restruimte, knoppen hun eigen breedte */
+    align-items: center; /* Knoppen verticaal in het midden van de titel */
+    column-gap: var(--space-md);
+}
+
+.sponsor-header h2 {
+    grid-column: 1;
+    grid-row: 1;
+    margin-bottom: 0; /* Overschrijft standaard H2 margin voor strakke uitlijning */
+}
+
+.sponsor-description {
+    grid-column: 1 / -1; /* Pakt de volle breedte op de tweede rij */
+    grid-row: 2;
+    margin-top: var(--space-xs);
+    margin-bottom: 0;
+    max-width: 65ch; /* Voorkomt dat de tekst te breed en onleesbaar wordt */
+}
+
+.carousel-controls {
+    grid-column: 2;
+    grid-row: 1;
+    display: flex;
+    gap: 1rem; /* Onze afgesproken ademruimte voor motorische toegankelijkheid */
+}
+
+/* Mobiele fallback: op piepkleine schermen stapelen we alles logisch onder elkaar */
+@media (max-width: 480px) {
+    .sponsor-header { grid-template-columns: 1fr; }
+    
+    .sponsor-header h2 { 
+        grid-column: 1; grid-row: 1; margin-bottom: var(--space-xs); 
+    }
+    .sponsor-description { 
+        grid-column: 1; grid-row: 2; margin-top: 0; margin-bottom: var(--space-sm); 
+    }
+    .carousel-controls { 
+        grid-column: 1; grid-row: 3; justify-content: flex-start; 
+    }
+}
+
+.carousel-btn {
+    background-color: var(--surface);
+    color: var(--primary);
+    border: 2px solid var(--primary);
+    border-radius: 50%;
+    width: 3.5rem;
+    height: 3.5rem;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.carousel-btn .material-symbols-outlined {
+    font-size: 1.5rem;
+}
+
+@media (hover: hover) {
+    .carousel-btn:hover:not(:disabled) {
+        background-color: var(--primary);
+        color: var(--on-primary);
+        transform: translateY(-2px);
+    }
+}
+
+.carousel-btn:active:not(:disabled) {
+    transform: scale(0.94);
+}
+
+.carousel-btn:disabled {
+    opacity: 1; /* Verwijder transparantie, we lossen het op met vorm */
+    cursor: not-allowed;
+    background-color: transparent; 
+    color: var(--on-surface-variant); /* Veilig hoog contrast (11:1) */
+    border: 2px dashed var(--surface-variant); /* Patroonwijziging als visuele indicator zónder kleurafhankelijkheid */
+}
+
+/* Fix voor knoppen in Forced Colors / Dark Mode */
+@media (prefers-color-scheme: dark) {
+    .carousel-btn {
+        background-color: var(--surface-container-high);
+        border-color: var(--primary);
+    }
+    .carousel-btn:disabled {
+        background-color: transparent;
+        border-color: var(--surface-container-highest);
+        color: var(--on-surface-variant);
+    }
+    /* Specifieke hover en focus achtergrondkleur voor faq-summary in donkere modus */
+    .faq-summary:hover,
+    .faq-summary:focus-visible {
+        background-color: var(--surface-container-highest);
+    }
+}
+@media (forced-colors: active) {
+    .carousel-btn:disabled {
+        border-style: dashed;
+        opacity: 1;
+    }
+}
 
 /* ==========================================================================
    Toegankelijkheid: Forced Colors Mode (High Contrast)
@@ -925,7 +1135,7 @@ picture.card-logo img { width: 100%; height: 100%; object-fit: contain; padding:
 
 /* ==========================================================================
    Toegankelijkheid Hulpmiddelen (Screen Reader Only)
-   ========================================================================== */
+   ========================================================================== */    
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
 
 /* ==========================================================================

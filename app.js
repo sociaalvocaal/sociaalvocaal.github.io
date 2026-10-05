@@ -233,4 +233,54 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+
+    // 10. CAROUSEL CONTROLS (Progressive Enhancement)
+    const sponsorTrack = document.querySelector('.sponsor-track');
+    const carouselControls = document.querySelector('.carousel-controls');
+    
+    if (sponsorTrack && carouselControls) {
+        // 1. Zodra JS draait: toon knoppen & hef dubbele tab-navigatie op
+        carouselControls.removeAttribute('hidden');
+        sponsorTrack.removeAttribute('tabindex');
+        
+        const prevBtn = carouselControls.querySelector('.prev-btn');
+        const nextBtn = carouselControls.querySelector('.next-btn');
+        
+        // 2. Bereken dynamisch de scroll-afstand (1 kaart + gap)
+        const getScrollAmount = () => {
+            const card = sponsorTrack.querySelector('.sponsor-card');
+            const gap = parseFloat(window.getComputedStyle(sponsorTrack).gap) || 24;
+            return card ? card.offsetWidth + gap : 300;
+        };
+
+        nextBtn.addEventListener('click', () => {
+            sponsorTrack.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
+        });
+
+        prevBtn.addEventListener('click', () => {
+            sponsorTrack.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' });
+        });
+
+        // 3. State management voor knoppen met slimme focus-afhandeling
+        const updateButtonStates = () => {
+            // 5px speelruimte om afrondingsfouten door browser-zoom te pareren
+            const isAtStart = sponsorTrack.scrollLeft <= 5;
+            const isAtEnd = Math.ceil(sponsorTrack.scrollLeft + sponsorTrack.clientWidth) >= sponsorTrack.scrollWidth - 5;
+            
+            prevBtn.disabled = isAtStart;
+            nextBtn.disabled = isAtEnd;
+            
+            // WCAG Toegankelijkheid: Als de gebruiker entert tot het einde, en de knop disabled wordt, 
+            // valt de focus anders weg. We verplaatsen deze dan logisch naar de andere, werkende knop.
+            if (isAtStart && document.activeElement === prevBtn) nextBtn.focus();
+            if (isAtEnd && document.activeElement === nextBtn) prevBtn.focus();
+        };
+
+        sponsorTrack.addEventListener('scroll', updateButtonStates, { passive: true });
+        window.addEventListener('resize', updateButtonStates, { passive: true });
+        
+        // Timeout geeft de DOM een milliseconde de tijd om elementbreedtes in te laden
+        setTimeout(updateButtonStates, 100); 
+    }
+    
 });
