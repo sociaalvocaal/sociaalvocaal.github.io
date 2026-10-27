@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Controleer je aanvraag | Sociaal Vocaal</title>
+    <meta name="description" content="Verras iemand met een gratis serenade in Utrecht! Sociaal Vocaal is een a-capellakoor dat zingt om te bedanken, op te vrolijken of te troosten.">
+    <!-- Note to self: update later hieronder de canonical met jullie definitieve, beveiligde url. Dat is goed voor de SEO. -->
+    <link rel="canonical" href="https://sociaalvocaal.github.io/" />
+    <link rel="stylesheet" href="index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body class="auto-hide-header">
+<!-- Floating Pill Header met ingebouwde skiplinks-hub -->
+
+<!-- ==========================================================================
+0. Inleiding
+========================================================================== -->
+
+<header id="main-header" class="floating-pill" role="banner">
+    
+    <!-- Skip-links Hub (Verborgen totdat je Tab gebruikt) -->
+    <nav aria-label="Snelkoppelingen" class="skip-links-hub">
+        <ul class="skip-list">
+            <li><a href="#hoofdinhoud" class="skip-btn">Naar hoofdinhoud</a></li>
+            <li><a href="#concert-aanvragen" class="skip-btn">Direct concert aanvragen</a></li>
+            <li><a href="#sitemap-placeholder" class="skip-btn">Naar sitemap</a></li>
+        </ul>
+    </nav>
+
+    <!-- De altijd zichtbare basis van de pil -->
+    <div class="pill-bar">
+        <!-- Slim logo dat animeert bij scrollen -->
+        <a href="index.html" class="logo-link" aria-label="Sociaal Vocaal startpagina">
+            <span class="logo-text-container">
+                <span class="logo-full">Sociaal Vocaal</span>
+                <span class="logo-short" aria-hidden="true">SV</span>
+            </span>
+        </a>
+
+        <!-- Actieknoppen en menu-toggle -->
+        <div class="pill-actions">
+            <!-- Desktop acties: visueel verborgen op mobiel om de pil compact te houden -->
+            <a href="#concert-aanvragen" class="btn btn-primary btn-small desktop-only">Concert aanvragen</a>
+            <a href="#doe-mee" class="btn btn-white btn-small desktop-only">Zing mee</a>
+            
+            <button id="menu-toggle" class="menu-btn" aria-expanded="false" aria-controls="morphing-menu" aria-label="Open hoofdmenu">
+                <span class="menu-btn-text sr-only">Menu</span>
+                <span class="material-symbols-outlined icon-open" aria-hidden="true">menu</span>
+                <span class="material-symbols-outlined icon-close" aria-hidden="true">close</span>
+            </button>
+        </div>
+    </div>
+
+<!-- Het uitrekkende Bento-menu -->
+    <nav id="morphing-menu" class="morphing-container" aria-label="Hoofdmenu">
+        <div class="menu-inner">
+            <div class="menu-bento-grid">
+                
+                <div class="menu-bento-item card-white">
+                    <p id="menu-snel-regelen" class="menu-heading">Snel regelen</p>
+                    <ul class="menu-list" aria-labelledby="menu-snel-regelen">
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#concert-aanvragen">Gratis concert aanvragen</a></li>
+                        <li><a href="#doe-mee">Zing mee in ons koor</a></li>
+                    </ul>
+                </div>
+                
+                <div class="menu-bento-item card-white">
+                    <p id="menu-ontdekken" class="menu-heading">Ontdekken</p>
+                    <ul class="menu-list" aria-labelledby="menu-ontdekken">
+                        <li><a href="#">Agenda</a></li>
+                        <li><a href="#">Onze muziek</a></li>
+                        <li><a href="#ons-verhaal">Ons verhaal</a></li>
+                    </ul>
+                </div>
+                
+                <div class="menu-bento-item card-white">
+                    <p id="menu-samenwerken" class="menu-heading">Samenwerken & steunen</p>
+                    <ul class="menu-list" aria-labelledby="menu-samenwerken">
+                        <li><a href="#samenwerken">Artistiek samenwerken</a></li>
+                        <li><a href="#samenwerken">Zakelijk</a></li>
+                        <li><a href="#samenwerken">Steun ons</a></li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </nav>
+    
+</header>
+
+<main id="hoofdinhoud" tabindex="-1">
+       
+    <section class="section-padding">
+        <div class="container container-inhoud">
+            <h1 class="h1-zonder-hero">Controleer je aanvraag</h1>
+            <p class="p-intro">Je bent er bijna! Controleer hieronder jouw invoer.</p>
+            
+            <div class="form-disclaimer mt-large" style="align-items: center;">
+                <span class="material-symbols-outlined text-primary" aria-hidden="true">info</span>
+                <p>Klopt er iets niet? <a href="#" id="terug-link-tekst" class="text-link">Ga terug naar het formulier</a> om het aan te passen.</p>
+            </div>
+
+            <!-- Deze lege lijst wordt door Javascript gevuld -->
+            <div id="samenvatting-container" class="mt-large" aria-live="polite">
+                <!-- Javascript injecteert hier de ingevulde gegevens -->
+            </div>
+            
+            <!-- De Definitieve Acties -->
+            <section class="form-submit-sectie form-bento-sectie" aria-labelledby="definitief-titel" style="margin-top: 4rem;">
+                <h2 id="definitief-titel" class="bento-sectie-titel">Klaar om te versturen?</h2>
+                <p>Als je op de knop 'Definitief verzenden' klikt, wordt je aanvraag definitief naar ons verzonden.</p>
+                
+            <div style="display: flex; gap: 1rem; align-items: stretch; flex-wrap: wrap; margin-top: 1.5rem;">
+                
+                <div style="display: flex; gap: 1rem; align-items: stretch; flex-wrap: wrap; margin-top: 1.5rem;">
+                    <button id="definitief-verzenden-btn" class="btn crescendo-btn is-ready">
+                        <span class="crescendo-text">Definitief verzenden</span>
+                        <span class="material-symbols-outlined crescendo-icon" aria-hidden="true">send</span>
+                    </button>
+                    
+                    <a href="#" id="terug-link-knop" class="btn btn-white controle-terug-btn">
+                        <span class="material-symbols-outlined" aria-hidden="true">arrow_back</span>                        
+                        <span class="crescendo-text">Terug om aan te passen</span>
+                    </a>
+                </div>
+            </div>
+            </section>
+            
+        </div>
+    </section>
+
+
+
+
+</main>
+
+<!-- ==========================================================================
+   5. Footer
+========================================================================== -->
+<footer class="footer new-footer footer-no-cta">
+    <nav aria-label="Footer navigatie">
+        
+        <div class="container footer-centered-layout">
+            
+            <!-- Visuele Focus 1: Contactgegevens prominent in het midden -->
+            <div class="footer-block footer-contact">
+                <h2 class="footer-heading">Contact</h2>
+                <ul class="footer-contact-list">
+                    <li>
+                        <a href="tel:+00000000000" class="footer-primary-link">
+                            <span class="material-symbols-outlined" aria-hidden="true">call</span>
+                            +00000000000
+                        </a>
+                    </li>
+                    <li>
+                        <a href="mailto:sociaalvocaal@outlook.com" class="footer-primary-link">
+                            <span class="material-symbols-outlined" aria-hidden="true">mail</span>
+                            sociaalvocaal@outlook.com
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://maps.app.goo.gl/AUjiTvBH22xHCn5e8" class="footer-primary-link">
+                            <span class="material-symbols-outlined" aria-hidden="true">location_on</span>
+                            Extralangeadresregel 133, Utrecht
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Visuele Focus 2: Vlakke, ontspannen sitenavigatie -->
+            <div class="footer-block footer-nav">
+                <h2 class="footer-heading">Navigeer verder naar</h2>
+                <ul class="footer-inline-links">
+                    <li><a href="#" class="sitemap-link"><span class="material-symbols-outlined" aria-hidden="true">account_tree</span>Sitemap</a></li>
+                    <li><a href="#concert-aanvragen">Concert aanvragen</a></li>
+                    <li><a href="#doe-mee">Zing mee</a></li>
+                    <li><a href="#samenwerken">Samenwerken en steunen</a></li>
+                    <li><a href="#">Agenda</a></li>
+                    <li><a href="#">Onze muziek</a></li>
+                    <li><a href="#ons-verhaal">Ons verhaal</a></li>
+                </ul>
+            </div>
+
+            <!-- Visuele Focus 3: Grote, ronde social media knoppen -->
+            <div class="footer-block footer-socials">
+                <h2 class="footer-heading">Volg ons</h2>
+                <ul class="footer-social-list">
+                    <li><a href="https://www.instagram.com/sociaal.vocaal/" aria-label="Instagram"><span class="fa fa-instagram" aria-hidden="true"></span></a></li>
+                    <li><a href="https://wa.me/00000000000" aria-label="WhatsApp"><span class="fa fa-whatsapp" aria-hidden="true"></span></a></li>
+                    <li><a href="https://www.youtube.com/" aria-label="YouTube"><span class="fa fa-youtube" aria-hidden="true"></span></a></li>
+                    <li><a href="https://www.linkedin.com/" aria-label="LinkedIn"><span class="fa fa-linkedin" aria-hidden="true"></span></a></li>
+                </ul>
+            </div>
+            
+        </div>
+        
+        <!-- De Bottombar -->
+        <div class="footer-bottom">
+            <div class="container footer-bottom-container">
+                <ul class="footer-legal-list">
+                    <li><a href="#">Toegankelijkheidsverklaring</a></li>
+                    <li><a href="#">Cookieverklaring</a></li>
+                    <li><a href="#">Privacyverklaring</a></li>
+                </ul>
+                <div class="footer-meta">
+                    <ul>
+                        <li><span>Pagina voor laatst bijgewerkt op: donderdag 20 oktober 2026</span></li>
+                        <li><span>Bijgewerkt door: Peter Teunis</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+    </nav>
+</footer>
+
+<script src="app.js"></script>
+<script src="controle.js"></script>
+
+</body>
+</html>
