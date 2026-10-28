@@ -418,8 +418,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const foutLijst = form.querySelector('.fout-overzicht ul'); 
         const foutOverzicht = form.querySelector('.fout-overzicht');
         
-        function getRequiredInputs() {
-            return Array.from(form.querySelectorAll('input[required], select[required], textarea[required]'))
+        function getZichtbareVelden() {
+            return Array.from(form.querySelectorAll('input[name]:not([type="hidden"]), select[name], textarea[name]'))
                  .filter(el => !el.closest('[hidden]'));
         }
 
@@ -427,43 +427,53 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const storageKey = `sv-form-data-${form.id || 'standaard'}`;
 
-        // 1. PROGRESSIVE ENHANCEMENT: CONTACTVELDEN 
-        const contactSelect = form.querySelector('select[name="contact_voorkeur"]');
-        
-        if (contactSelect) {
-            const contactVelden = {
-                email: form.querySelector('#veld-email'),
-                telefoon: form.querySelector('#veld-telefoon'),
-                adres: form.querySelector('#veld-adres'),
-                instagram: form.querySelector('#veld-instagram')
-            };
+        // 1. PROGRESSIVE ENHANCEMENT: CONTACTVELDEN (100% Schaalbaar)
+        function setupDynamischeContactVelden(selectNaam, prefixVeld) {
+            const select = form.querySelector(`select[name="${selectNaam}"]`);
+            if (!select) return null;
 
-            function updateContactVelden() {
-                const geselecteerd = contactSelect.value;
+            function updateVelden() {
+                const geselecteerd = select.value;
                 
-                Object.values(contactVelden).forEach(container => {
-                    if(container) {
+                Array.from(select.options).forEach(optie => {
+                    const waarde = optie.value;
+                    if (!waarde) return; 
+                    
+                    const container = form.querySelector(`#${prefixVeld}-${waarde}`);
+                    if (!container) return; 
+
+                    if (waarde === geselecteerd) {
+                        container.hidden = false;
+                        container.querySelectorAll('input, select, textarea').forEach(input => {
+                            // Een veld is alleen verplicht als de hoofd-dropdown dat ook is
+                            input.required = select.hasAttribute('required');
+                        });
+                    } else {
                         container.hidden = true;
                         container.querySelectorAll('input, select, textarea').forEach(input => {
                             input.required = false;
-                            // 🟢 AANGEPAST: Maak dynamisch verborgen velden direct schoon
-                            verwijderFoutmelding(input); 
+                            
+                            // Haal direct eventuele validatiefouten weg omdat we dit veld verbergen
+                            input.classList.remove('is-invalid');
+                            input.removeAttribute('aria-invalid');
+                            let fout = container.nextElementSibling;
+                            if (fout && fout.classList.contains('inline-foutmelding')) fout.remove();
                         });
                     }
                 });
-
-                if (geselecteerd && contactVelden[geselecteerd]) {
-                    const actieveContainer = contactVelden[geselecteerd];
-                    actieveContainer.hidden = false;
-                    actieveContainer.querySelectorAll('input, select, textarea').forEach(input => input.required = true);
-                }
                 
-                checkFormulierStatus();
+                if (typeof checkFormulierStatus === 'function') checkFormulierStatus();
             }
 
-            contactSelect.addEventListener('change', updateContactVelden);
-            updateContactVelden(); 
+            // Draai direct 1x bij laden om de startstatus goed te zetten
+            updateVelden();
+            
+            select.addEventListener('change', updateVelden);
+            return updateVelden;
         }
+
+        const updatePrimairContact = setupDynamischeContactVelden('contact_voorkeur', 'veld');
+        const updateBackupContact = setupDynamischeContactVelden('contact_voorkeur_backup', 'veld-backup');
 
         // 2. INCLUSIEVE TEKST-TELLERS 
         const textareas = form.querySelectorAll('textarea');
@@ -495,6 +505,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // 3. UNIVERSELE VALIDATIEFUNCTIE
         function valideerVeld(input) {
             if (input.type === 'radio' || input.type === 'checkbox') {
+                if (!input.required) return { isGeldig: true, meldingen: [] }; // Niet verplicht = direct goed
                 const group = form.querySelectorAll(`input[name="${input.name}"]`);
                 const isAangevinkt = Array.from(group).some(item => item.checked);
                 return { isGeldig: isAangevinkt, meldingen: isAangevinkt ? [] : ["Dit veld is nog niet ingevuld."] };
@@ -505,8 +516,14 @@ document.addEventListener('DOMContentLoaded', () => {
             let meldingen = []; 
 
             if (getrimdeWaarde === '') {
-                return { isGeldig: false, meldingen: ["Dit veld is nog niet ingevuld."] };
+                if (input.required) {
+                    return { isGeldig: false, meldingen: ["Dit veld is nog niet ingevuld."] };
+                } else {
+                    return { isGeldig: true, meldingen: [] }; // Leeg en niet verplicht is helemaal prima
+                }
             }
+            
+            // --- Vanaf hier controleren we de inhoud (óók voor optionele velden die wel zijn ingevuld) ---
 
             if (input.type === 'email') {
                 let hasAt = spatielozeWaarde.includes('@');
@@ -563,8 +580,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // 4. STATISCHE CRESCENDO KNOP
         function checkFormulierStatus() {
-            const currentRequired = getRequiredInputs();
-            const isHelemaalGeldig = currentRequired.every(input => valideerVeld(input).isGeldig);
+            const controleVelden = getZichtbareVelden();
+            const isHelemaalGeldig = controleVelden.every(input => valideerVeld(input).isGeldig);
 
             if (isHelemaalGeldig) {
                 controleKnop.classList.add('is-ready');
@@ -776,18 +793,17 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
             
             foutLijst.innerHTML = '';
-            // Gebruik de nieuwe helper functie om alles schoon te vegen vóór de scan
-            getRequiredInputs().forEach(input => verwijderFoutmelding(input));
+            // Gebruik de nieuwe functie om alles schoon te vegen vóór de scan
+            const controleVelden = getZichtbareVelden();
+            controleVelden.forEach(input => verwijderFoutmelding(input));
             
             let eersteFout = null;
             const gecontroleerdeRadios = new Set();
-            
-            const currentRequired = getRequiredInputs();
 
-            currentRequired.forEach(input => {
+            controleVelden.forEach(input => {
                 const validatie = valideerVeld(input);
                 
-                let labelTekst = 'Een verplicht veld';
+                let labelTekst = input.required ? 'Een verplicht veld' : 'Een invulveld';
                 let vraagNummerTekst = ''; 
                 let isSubVraag = input.closest('.sub-veld') ? true : false; 
                 let containerBovenFout = input.closest('.sv-form-group'); 

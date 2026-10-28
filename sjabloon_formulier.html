@@ -98,14 +98,51 @@
 
 <main id="hoofdinhoud" tabindex="-1">
 
-    <section class>
+    <section class="hero-section-contentpagina section-padding">
         <div class="container container-inhoud">
-        <h1 class="h1-zonder-hero">Aanvraagformulier gratis concert</h1>
-            <p class>Hier vraag je een gratis concert aan voor iemand, een groep of een goed doel met een muzikaal gebaar.</p>
-            <p>Vraag je zakelijk aan? Navigeer dan naar het <a href="#" class="text-link">zakelijk aanvraagformulier</a>.</p>
-            <p>Het formulier bestaat uit 18 vragen. Met deze informatie kunnen wij ons goed voorbereiden op het concert. De meeste vragen zijn niet verplicht om in te vullen. Kan je een vraag niet beantwoorden? Laat het dan leeg en dan bespreken we het later.</p>
-            <p>Om jouw privacy te beschermen kan je dit formulier anoniem invullen. Verder bewaren jouw contactgegevens nadat ons gesprekken afgerond zijn voor maximaal 6 maanden. We verwijderen jouw gegevens eerder als je dat vraagt.</p>
-            <p class="pb-medium">Veel invulplezier!</p>
+            <div class="container">
+                <div class="hero-content">
+                <h1 class="hero-heading">Vraag een <span class="font-italic">gratis concert</span> aan.</h1>
+                    <p class="hero-lead">Op deze pagina vraag je een gratis concert aan voor iemand, een groep of een goed doel.</p> 
+                        <nav aria-labelledby="toc-heading">
+                            <h2 class="h2-klein">Scroll snel naar</h2>
+                            <ul class="check-list">
+                                <li><a href="#hoe-werkt-het" class="text-link">Hoe werkt het?</a></li>
+                                <li><a href="#start-formulier" class="text-link">Aanvraagformulier</a></li>
+                            </ul>
+                        </nav>
+            </div>  
+        </div>
+    </section>
+    <div class="container">
+        <hr class="mb-large">        
+        <h2 id="hoe-werkt-het">Hoe werkt het?</h2>
+                    <p>Een aanvraag doe je in 4 stappen.</p>
+                        <ol>
+                            <li>Jij neemt met ons contact op via het aanvraagformulier hieronder of het contactformulier.</li>
+                            <li>Wij nemen contact met jou op via een door jou aangegeven contactoptie. Dat kan bellend, append, via de mail, via Instagram of we komen even langs. Samen prikken we een datum en spreken we af hoe we het concert geven.</li>
+                            <li>Jij regelt de locatie, de ruimte en zorgt ervoor dat de ontvanger(s) er is of zijn.</li>
+                            <li>Op de concertdag komen we met het hele koor tegelijkertijd binnen en houden we het concert.</li>
+                        </ol>
+                    <p>Wat er na het concert gebeurt spreken we met jou af. Soms kletsen we even na, drinken we samen iets of moeten wij direct door naar de volgende locatie. Het is handig om dit even voor te bespreken met jouw contactpersoon.</p>
+                
+                <h2 class="h2-klein">Onze muziekstijl?</h2>
+                    <p>Op <a href="#" class="text-link"> onze muziekpagina</a> (pagina nog in aanbouw) vind je alle informatie over onze muziekstijl.</p>                    
+        
+        
+            <figure class="article-figure figure-vertical">
+                <img src="../resources/Afbeeldingen/Sarah_Artwork-01_Serenade.jpg" alt="Scan van een geschilderd en getekend schilderij. Vier koorleden zingen staand om twee zittende personen die in schaduw getekend zijn." loading="lazy"/>
+                <figcaption>
+                    [Bijschrijft dat Sarah nog schrijft]. Geschilderd door Sarah Cranko.
+                </figcaption>
+            </figure>
+
+        <hr class="mb-large">        
+        <h2 id="start-formulier">Aanvraag&shy;formulier</h2>
+            <p>Neem de tijd en ruimte om in formulier je verhaal te delen met ons, zodat wij het concert zo goed mogelijk op jouw situatie aan kunenn laten sluiten. Er zijn 13 vragen. Je hoeft niet alle vragen in te vullen. Laat een veld leeg als je de aanvraag snel in wil vullen of het antwoord op de vraag niet weet.</p> 
+            <p>Bel je liever? Vul dan het <a href=#contact class="text-link"> het contactformulier </a>(pagina nog in aanbouw) in en vraag om een belverzoek. Helaas hebben we nog geen telefoonnummer die we op de website kunnen plaatsen.</p>
+            <p>Vraag je zakelijk aan? Navigeer dan naar het <a href="#" class="text-link">(pagina nog in aanbouw) zakelijk aanvraagformulier</a>.</p>
+            <p class="pb-medium">Om jouw privacy te beschermen kan je dit formulier anoniem invullen. Verder bewaren jouw contactgegevens nadat ons gesprekken afgerond zijn voor maximaal 6 maanden. We verwijderen jouw gegevens eerder als je dat vraagt.</p>
         
             <form novalidate id="aanvraag-formulier" class="sv-form mt-large">
                 
@@ -121,10 +158,11 @@
                 <section class="form-bento-sectie" aria-labelledby="sectie-1-titel">
                     <h2 id="sectie-1-titel" class="bento-sectie-titel">1. Jouw gegevens</h2>
 
+                    <!-- Vraag 1 -->
                     <div class="sv-form-group">
                         <label for="naam" class="sv-label">
-                            <span class="vraag-nummer">Vraag 1 van 18 (verplicht)</span> 
-                            Onder welke (schuil)naam wil je dit formulier opgeven?
+                            <span class="vraag-nummer">Vraag 1 van 13 (verplicht)</span> 
+                            Wat is je (schuil)naam?
                         </label>                    
                         <p id="naam-uitleg" class="sv-description">Je mag een neppe naam kiezen, als je het fijn vindt om je anoniem in ons systeem te zetten.</p>
                         <div class="sv-input-wrapper">
@@ -132,26 +170,30 @@
                         </div>
                     </div>
 
-                    <div class="sv-form-group">
+                    <!-- Vraag 2 (Primair contact) -->
+                    <div class="sv-form-group mt-large">
                         <label for="contact-methode" class="sv-label">
-                            <span class="vraag-nummer">Vraag 2 van 18 (verplicht)</span> 
-                            Op welke manier kunnen we contact met je opnemen?
+                            <span class="vraag-nummer">Vraag 2 van 13 (verplicht)</span> 
+                            Op welke manier zullen we contact met jou opnemen?
                         </label>
                         <div class="sv-input-wrapper select-wrapper">
-                            <select id="contact-methode" name="contact_voorkeur" class="sv-select" required aria-controls="contact-dynamische-velden">                                <option value="">Maak een keuze...</option>
-                                <option value="email">E-mailadres</option>
-                                <option value="telefoon">Telefoonnummer</option>
-                                <option value="adres">Postadres</option>
-                                <option value="instagram">Instagram</option>
+                            <select id="contact-methode" name="contact_voorkeur" class="sv-select" required aria-controls="contact-dynamische-velden">                                
+                                <option value="">Maak een keuze...</option>
+                                <option value="email">Mail mij</option>
+                                <option value="telefoon">Bel mij</option>
+                                <option value="telefoon">Stuur me een berichtje op WhatsApp</option>
+                                <option value="instagram">Stuur me een berichtje op Instagram</option>
+                                <option value="adres">Kom even langs (alleen in omgeving Utrecht)</option>
                             </select>
                         </div>
 
+                        <!-- Dynamische container Vraag 2 -->
                         <div id="contact-dynamische-velden" class="mt-large">
                             <div id="veld-email" class="sub-veld sv-form-group">
                                 <label for="contact-email" class="sv-label">Wat is je e-mailadres?</label>
                                 <p id="mailadres-voorbeeld" class="sv-example">Bijvoorbeeld: naam@voorbeeld.nl</p>
                                 <div class="sv-input-wrapper">
-                                    <input type="email" id="contact-email" name="contact_email" class="sv-veld-input" autocomplete="email" required aria-describedby="mailadres-voorbeeld">
+                                    <input type="email" id="contact-email" name="contact_email" class="sv-veld-input" autocomplete="email" aria-describedby="mailadres-voorbeeld">
                                 </div>
                             </div>
 
@@ -159,7 +201,7 @@
                                 <label for="contact-tel" class="sv-label">Wat is je telefoonnummer?</label>
                                 <p id="telefoon-voorbeeld" class="sv-example">Bijvoorbeeld: +31612345678</p>
                                 <div class="sv-input-wrapper">
-                                    <input type="tel" id="contact-tel" name="contact_tel" class="sv-veld-input" autocomplete="tel" required aria-describedby="telefoon-voorbeeld">
+                                    <input type="tel" id="contact-tel" name="contact_tel" class="sv-veld-input" autocomplete="tel" aria-describedby="telefoon-voorbeeld">
                                 </div>
                             </div>
 
@@ -167,25 +209,81 @@
                                 <label for="contact-adres" class="sv-label">Wat is je straatnaam en huisnummer?</label>
                                 <p id="adres-voorbeeld" class="sv-example">Bijvoorbeeld: Marktstraat 123 A</p>
                                 <div class="sv-input-wrapper">
-                                    <input type="text" id="contact-adres" name="contact_adres" class="sv-veld-input" autocomplete="street-address" required aria-describedby="adres-voorbeeld">
+                                    <input type="text" id="contact-adres" name="contact_adres" class="sv-veld-input" autocomplete="street-address" aria-describedby="adres-voorbeeld">
                                 </div>
-                                <label for="contact-postcode" class="sv-label">Wat is je postcode?</label>
+                                <label for="contact-postcode" class="sv-label mt-large">Wat is je postcode?</label>
                                 <p id="postcode-voorbeeld" class="sv-example">Bijvoorbeeld: 1234 AB</p>
                                 <div class="sv-input-wrapper">
-                                    <input type="text" id="contact-postcode" name="contact_postcode" class="sv-veld-input" autocomplete="postal-code" required aria-describedby="postcode-voorbeeld">
+                                    <input type="text" id="contact-postcode" name="contact_postcode" class="sv-veld-input" autocomplete="postal-code" aria-describedby="postcode-voorbeeld">
                                 </div>
-                            </div>
-
-                            
+                            </div>                          
 
                             <div id="veld-instagram" class="sub-veld sv-form-group">
                                 <label for="contact-insta" class="sv-label">Wat is je Instagram gebruikersnaam?</label>
                                 <p id="insta-uitleg" class="sv-example">Bijvoorbeeld: @gebruikersnaam</p>
                                 <div class="sv-input-wrapper">
-                                    <input type="text" id="contact-insta" name="contact_insta" class="sv-veld-input" aria-describedby="insta-uitleg" required>
+                                    <input type="text" id="contact-insta" name="contact_insta" class="sv-veld-input" aria-describedby="insta-uitleg">
                                 </div>
                             </div>
+                        </div> <!-- Einde dynamische container Vraag 2 -->
+                    </div>
+
+                    <!-- Vraag 3 (Backup contact) -->
+                    <div class="sv-form-group mt-large">
+                        <label for="contact-methode-backup" class="sv-label">
+                            <span class="vraag-nummer">Vraag 3 van 13 (niet verplicht)</span> 
+                            Hoe kunnen we je bereiken als optie 1 ons niet lukt?
+                        </label>
+                        <div class="sv-input-wrapper select-wrapper">
+                            <select id="contact-methode-backup" name="contact_voorkeur_backup" class="sv-select" aria-controls="contact-dynamische-velden-backup">
+                                <option value="">Maak een keuze...</option>
+                                <option value="email">Mail mij</option>
+                                <option value="telefoon">Bel mij</option>
+                                <option value="telefoon">Stuur me een berichtje op WhatsApp</option>
+                                <option value="instagram">Stuur me een berichtje op Instagram</option>
+                                <option value="adres">Kom even langs (alleen in omgeving Utrecht)</option>
+                            </select>
                         </div>
+
+                        <!-- Dynamische container Vraag 3 -->
+                        <div id="contact-dynamische-velden-backup" class="mt-large">
+                            <div id="veld-backup-email" class="sub-veld sv-form-group">
+                                <label for="contact-email-backup" class="sv-label">Wat is je e-mailadres?</label>
+                                <p id="mailadres-backup-voorbeeld" class="sv-example">Bijvoorbeeld: naam@voorbeeld.nl</p>
+                                <div class="sv-input-wrapper">
+                                    <input type="email" id="contact-email-backup" name="contact_email_backup" class="sv-veld-input" autocomplete="email" aria-describedby="mailadres-backup-voorbeeld">
+                                </div>
+                            </div>
+
+                            <div id="veld-backup-telefoon" class="sub-veld sv-form-group">
+                                <label for="contact-tel-backup" class="sv-label">Wat is je telefoonnummer?</label>
+                                <p id="telefoon-backup-voorbeeld" class="sv-example">Bijvoorbeeld: +31612345678</p>
+                                <div class="sv-input-wrapper">
+                                    <input type="tel" id="contact-tel-backup" name="contact_tel_backup" class="sv-veld-input" autocomplete="tel" aria-describedby="telefoon-backup-voorbeeld">
+                                </div>
+                            </div>
+
+                            <div id="veld-backup-adres" class="sub-veld sv-form-group">
+                                <label for="contact-adres-backup" class="sv-label">Wat is je straatnaam en huisnummer?</label>
+                                <p id="adres-backup-voorbeeld" class="sv-example">Bijvoorbeeld: Marktstraat 123 A</p>
+                                <div class="sv-input-wrapper">
+                                    <input type="text" id="contact-adres-backup" name="contact_adres_backup" class="sv-veld-input" autocomplete="street-address" aria-describedby="adres-backup-voorbeeld">
+                                </div>
+                                <label for="contact-postcode-backup" class="sv-label mt-large">Wat is je postcode?</label>
+                                <p id="postcode-backup-voorbeeld" class="sv-example">Bijvoorbeeld: 1234 AB</p>
+                                <div class="sv-input-wrapper">
+                                    <input type="text" id="contact-postcode-backup" name="contact_postcode_backup" class="sv-veld-input" autocomplete="postal-code" aria-describedby="postcode-backup-voorbeeld">
+                                </div>
+                            </div>                          
+
+                            <div id="veld-backup-instagram" class="sub-veld sv-form-group">
+                                <label for="contact-insta-backup" class="sv-label">Wat is je Instagram gebruikersnaam?</label>
+                                <p id="insta-backup-uitleg" class="sv-example">Bijvoorbeeld: @gebruikersnaam</p>
+                                <div class="sv-input-wrapper">
+                                    <input type="text" id="contact-insta-backup" name="contact_insta_backup" class="sv-veld-input" aria-describedby="insta-backup-uitleg">
+                                </div>
+                            </div>
+                        </div> <!-- Einde dynamische container Vraag 3 -->
                     </div>
                 </section>
 
@@ -196,12 +294,14 @@
 
                     <fieldset class="sv-fieldset">
                         <legend class="sv-legend">
-                            <span class="vraag-nummer">Vraag 3 van 18 (niet verplicht)</span> 
+                            <span class="vraag-nummer">Vraag 4 van 13 (niet verplicht)</span> 
                             Wat voor soort aanvraag is dit?
                         </legend>
                         <div class="tactile-radio-group">
-                            <label class="tactile-radio-card" for="opvrolijken"><input type="radio" id="opvrolijken" name="type_aanvraag" value="opvrolijken" class="sr-only"><span class="radio-visual"></span><span class="radio-text">Iemand opvrolijken, troosten of bedanken</span></label>
-                            <label class="tactile-radio-card" for="maatschappelijke-prestatie"><input type="radio" id="maatschappelijke-prestatie" name="type_aanvraag" value="maatschappelijke_prestatie" class="sr-only"><span class="radio-visual"></span><span class="radio-text">In het zonnetje zetten voor een maatschappelijke prestatie</span></label>
+                            <label class="tactile-radio-card" for="opvrolijken"><input type="radio" id="opvrolijken" name="type_aanvraag" value="opvrolijken" class="sr-only"><span class="radio-visual"></span><span class="radio-text">Iemand opvrolijken</span></label>
+                            <label class="tactile-radio-card" for="troosten-of-steunen"><input type="radio" id="troosten-of-steunen" name="type_aanvraag" value="troosten_of_steunen" class="sr-only"><span class="radio-visual"></span><span class="radio-text">Iemand troosten of steunen</span></label>
+                            <label class="tactile-radio-card" for="bedanken"><input type="radio" id="bedanken" name="type_aanvraag" value="bedanken" class="sr-only"><span class="radio-visual"></span><span class="radio-text">Iemand bedanken</span></label>
+                            <label class="tactile-radio-card" for="maatschappelijke-prestatie"><input type="radio" id="maatschappelijke-prestatie" name="type_aanvraag" value="maatschappelijke_prestatie" class="sr-only"><span class="radio-visual"></span><span class="radio-text">Iemand in het zonnetje zetten voor een maatschappelijke prestatie</span></label>
                             <label class="tactile-radio-card" for="goed-doel"><input type="radio" id="goed-doel" name="type_aanvraag" value="goed_doel" class="sr-only"><span class="radio-visual"></span><span class="radio-text">Een goed doel in het zonnetje zetten</span></label>
                             <label class="tactile-radio-card" for="overig"><input type="radio" id="overig" name="type_aanvraag" value="overig" class="sr-only"><span class="radio-visual"></span><span class="radio-text">Overig</span></label>
                             <label class="tactile-radio-card" for="overslaan-3"><input type="radio" id="overslaan-3" name="type_aanvraag" value="overslaan" class="sr-only"><span class="radio-visual"></span><span class="radio-text">Ik sla deze vraag liever over</span></label>
@@ -210,26 +310,16 @@
 
                     <div class="sv-form-group mt-large">
                         <label for="concert-reden" class="sv-label">
-                            <span class="vraag-nummer">Vraag 4 van 18 (niet verplicht)</span> 
+                            <span class="vraag-nummer">Vraag 5 van 13 (niet verplicht)</span> 
                             Waarom vraag je dit concert aan?
                         </label>
-                        <p id="concert-reden-uitleg" class="sv-description">Vertel ons waarom deze persoon of groep dit concert verdient.</p>
+                        <p id="concert-reden-uitleg" class="sv-description">Vertel ons waarom deze persoon of groep dit concert verdient. Wat hoop je dat het optreden betekent voor de ontvanger(s)?</p>
                         <div class="sv-input-wrapper">
                             <textarea id="concert-reden" name="concert_reden" rows="6" class="sv-textarea" aria-describedby="concert-reden-uitleg concert-reden-teller"></textarea>
                         </div>
                         <div id="concert-reden-teller" aria-live="polite" class="tekst-teller">Nog 3000 tekens over.</div>
                     </div>
 
-                    <div class="sv-form-group mt-large">
-                        <label for="impact-ontvanger" class="sv-label">
-                            <span class="vraag-nummer">Vraag 5 van 18 (niet verplicht)</span> 
-                            Wat hoop je dat het optreden betekent voor de ontvanger(s)?
-                        </label>
-                        <div class="sv-input-wrapper">
-                            <textarea id="impact-ontvanger" name="impact_ontvanger" rows="6" class="sv-textarea" aria-describedby="impact-ontvanger-teller"></textarea>
-                        </div>
-                        <div id="impact-ontvanger-teller" aria-live="polite" class="tekst-teller">Nog 3000 tekens over.</div>
-                    </div>
                 </section>
 
                 <!-- SECTIE 3 -->
@@ -238,7 +328,7 @@
 
                     <fieldset class="sv-fieldset">
                         <legend class="sv-legend">
-                            <span class="vraag-nummer">Vraag 6 van 18 (verplicht)</span> 
+                            <span class="vraag-nummer">Vraag 6 van 13 (verplicht)</span> 
                             Is het mogelijk om het concert op zaterdag 9 januari 2027 plaats te laten vinden?
                         </legend>
                         <div class="tactile-radio-group">
@@ -250,7 +340,7 @@
 
                     <div class="sv-form-group mt-large">
                         <label for="gewenste-datum" class="sv-label">
-                            <span class="vraag-nummer">Vraag 7 van 18 (niet verplicht)</span> 
+                            <span class="vraag-nummer">Vraag 7 van 13 (niet verplicht)</span> 
                             Kan je niet op onze concertdag? Geef dan een gewenste datum of periode op.
                         </label>
                         <p id="gewenste-datum-uitleg" class="sv-description">Mag globaal. Sla deze vraag over als je bij vraag 6 hebt aangegeven dat je op de concertdag kan.</p>
@@ -260,18 +350,8 @@
                     </div>
 
                     <div class="sv-form-group">
-                        <label for="flexibiliteit-datum" class="sv-label">
-                            <span class="vraag-nummer">Vraag 8 van 18 (niet verplicht)</span> 
-                            Hoe flexibel is deze datum?
-                        </label>
-                        <div class="sv-input-wrapper">
-                            <input type="text" id="flexibiliteit-datum" name="flexibiliteit_datum" class="sv-input">
-                        </div>
-                    </div>
-
-                    <div class="sv-form-group">
                         <label for="adres-locatie" class="sv-label">
-                            <span class="vraag-nummer">Vraag 9 van 18 (niet verplicht)</span> 
+                            <span class="vraag-nummer">Vraag 8 van 13 (niet verplicht)</span> 
                             Wat is de straatnaam en huisnummer van de concertlocatie?
                         </label>
                         <p id="adres-voorbeeld" class="sv-example">Bijvoorbeeld: Marktstraat 123 A</p>
@@ -282,10 +362,9 @@
 
                     <div class="sv-form-group mt-large">
                         <label for="omschrijving-locatie" class="sv-label">
-                            <span class="vraag-nummer">Vraag 10 van 18 (niet verplicht)</span> 
-                            Kun je de locatie omschrijven?
+                            <span class="vraag-nummer">Vraag 9 van 13 (niet verplicht)</span> 
+                            Is er een ruimte waar we onze jassen en tassen even kunnen neerleggen voordat we de ruimte binnengaan waar het concert plaatsvindt?
                         </label>
-                        <p id="omschrijving-locatie-uitleg" class="sv-description">Beschrijf hier wat voor ruimte het is, of het binnen of buiten is, hoe groot de ruimte is en of bijzonderheden zijn. Als er een andere ruimte is waar we even onze tassen neer kunnen leggen voordat de naar de ruimte gaan waar het optreden is, dan maken we graag gebruik van deze optie.</p>
                         <div class="sv-input-wrapper">
                             <textarea id="omschrijving-locatie" name="omschrijving_locatie" rows="3" class="sv-textarea" aria-describedby="omschrijving-locatie-uitleg omschrijving-locatie-teller"></textarea>
                         </div>
@@ -294,7 +373,7 @@
 
                     <div class="sv-form-group mt-large">
                         <label for="duur-concert" class="sv-label">
-                            <span class="vraag-nummer">Vraag 11 van 18 (niet verplicht)</span>
+                            <span class="vraag-nummer">Vraag 10 van 13 (niet verplicht)</span>
                             Hoe lang mag het concert maximaal duren?
                         </label>
                         <p id="duur-concert-uitleg" class="sv-description">Wij kunnen tot 40 minuten zingen.</p>
@@ -303,68 +382,21 @@
                         </div>
                     </div>
 
-                    <div class="sv-form-group">
-                        <label for="aantal-mensen" class="sv-label">
-                            <span class="vraag-nummer">Vraag 12 van 18 (niet verplicht)</span>
-                            Hoeveel mensen zijn er ongeveer aanwezig?
-                        </label>
-                        <p id="aantal-mensen-uitleg" class="sv-description">Vul een cijfer in.</p>
-                        <div class="sv-input-wrapper">
-                            <input type="text" id="aantal-mensen" name="aantal_mensen" inputmode="numeric" pattern="[0-9]*" class="sv-input" aria-describedby="aantal-mensen-uitleg">
-                        </div>
-                    </div>
-
-                    <fieldset class="sv-fieldset mt-large">
-                        <legend class="sv-legend">
-                            <span class="vraag-nummer">Vraag 13 van 18 (niet verplicht)</span>
-                            Is er stroom aanwezig? waar wij bijvoorbeeld onze telefoon op kunnen laden?
-                        </legend>
-                        <div class="tactile-radio-group">
-                            <label class="tactile-radio-card" for="stroom-ja"><input type="radio" id="stroom-ja" name="stroom_aanwezig" value="ja" class="sr-only"><span class="radio-visual"></span><span class="radio-text">Ja</span></label>
-                            <label class="tactile-radio-card" for="stroom-nee"><input type="radio" id="stroom-nee" name="stroom_aanwezig" value="nee" class="sr-only"><span class="radio-visual"></span><span class="radio-text">Nee</span></label>
-                            <label class="tactile-radio-card" for="stroom-weet-niet"><input type="radio" id="stroom-weet-niet" name="stroom_aanwezig" value="weet_niet" class="sr-only"><span class="radio-visual"></span><span class="radio-text">Weet ik niet</span></label>
-                        </div>
-                    </fieldset>
-
-                    <fieldset class="sv-fieldset">
-                        <legend class="sv-legend">
-                            <span class="vraag-nummer">Vraag 14 van 18 (niet verplicht)</span>
-                            Is er een wc aanwezig waar wij gebruik van kunnen maken?
-                        </legend>
-                        <div class="tactile-radio-group">
-                            <label class="tactile-radio-card" for="wc-ja"><input type="radio" id="wc-ja" name="wc_aanwezig" value="ja" class="sr-only"><span class="radio-visual"></span><span class="radio-text">Ja</span></label>
-                            <label class="tactile-radio-card" for="wc-nee"><input type="radio" id="wc-nee" name="wc_aanwezig" value="nee" class="sr-only"><span class="radio-visual"></span><span class="radio-text">Nee</span></label>
-                            <label class="tactile-radio-card" for="wc-weet-niet"><input type="radio" id="wc-weet-niet" name="wc_aanwezig" value="weet_niet" class="sr-only"><span class="radio-visual"></span><span class="radio-text">Weet ik niet</span></label>
-                        </div>
-                    </fieldset>
-
                     <div class="sv-form-group mt-large">
                         <label for="muziek-wensen" class="sv-label">
-                            <span class="vraag-nummer">Vraag 15 van 18 (niet verplicht)</span> 
-                            Wil je een muzieknummer of bepaald type muziek aanvragen? 
+                            <span class="vraag-nummer">Vraag 11 van 13 (niet verplicht)</span> 
+                            Zijn er in de muziekkeuzes dingen waar we rekening mee kunnen houden?
                         </label>
-                        <p id="muziek-wensen-uitleg" class="sv-description">Geef het aan en dan overleggen we met jou of dat kan. We weten namelijk niet of het op tijd lukt om iets in te studeren.</p>
+                        <p id="muziek-wensen-uitleg" class="sv-description">De nummers die we zingen stemmen we af op de situatie. Soms past iets heel goed of juist niet, maar dat kunnen we niet altijd goed inschatten. Kunnen we ergens rekening mee houden? Denk bijvoorbeeld aan de volgende thema's: dankbaarheid, energiek, feestelijk, opvrolijken, krachtig, liefdevol, melancholisch, nostalgisch, ontroerend, rustgevend, troostend, verbindend en vreugdevol.</p>
                         <div class="sv-input-wrapper">
                             <textarea id="muziek-wensen" name="muziek_wensen" rows="3" class="sv-textarea" aria-describedby="muziek-wensen-uitleg muziek-wensen-teller"></textarea>
                         </div>
                         <div id="muziek-wensen-teller" aria-live="polite" class="tekst-teller">Nog 1000 tekens over.</div>
                     </div>
 
-                    <fieldset class="sv-fieldset mt-large">
-                        <legend class="sv-legend">
-                            <span class="vraag-nummer">Vraag 16 van 18 (niet verplicht)</span> 
-                            Is het optreden openbaar of privé?
-                        </legend>
-                        <div class="tactile-radio-group">
-                            <label class="tactile-radio-card" for="optreden-openbaar"><input type="radio" id="optreden-openbaar" name="soort_optreden" value="openbaar" class="sr-only"><span class="radio-visual"></span><span class="radio-text">Openbaar</span></label>
-                            <label class="tactile-radio-card" for="optreden-privé"><input type="radio" id="optreden-privé" name="soort_optreden" value="privé" class="sr-only"><span class="radio-visual"></span><span class="radio-text">Privé</span></label>
-                            <label class="tactile-radio-card" for="optreden-overig"><input type="radio" id="optreden-overig" name="soort_optreden" value="overig" class="sr-only"><span class="radio-visual"></span><span class="radio-text">Overig</span></label>
-                        </div>
-                    </fieldset>
-
                     <fieldset class="sv-fieldset">
                         <legend class="sv-legend">
-                            <span class="vraag-nummer">Vraag 17 van 18 (verplicht)</span> 
+                            <span class="vraag-nummer">Vraag 12 van 13 (verplicht)</span> 
                             Geef je aan ons toestemming voor het maken en delen van media?
                         </legend>
                         <div class="tactile-radio-group">
@@ -383,7 +415,7 @@
 
                     <div class="sv-form-group mt-large">
                         <label for="overig-kwijt" class="sv-label">
-                            <span class="vraag-nummer">Vraag 18 van 18 (niet verplicht)</span> 
+                            <span class="vraag-nummer">Vraag 13 van 13 (niet verplicht)</span> 
                             Wil je verder nog iets kwijt?
                         </label>
                         <div class="sv-input-wrapper">
