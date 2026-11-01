@@ -475,6 +475,32 @@ document.addEventListener('DOMContentLoaded', () => {
         const updatePrimairContact = setupDynamischeContactVelden('contact_voorkeur', 'veld');
         const updateBackupContact = setupDynamischeContactVelden('contact_voorkeur_backup', 'veld-backup');
 
+        // 1b. PROGRESSIVE ENHANCEMENT: VRAAG 5B (Datum)
+        const concertdagRadios = form.querySelectorAll('input[name="concertdag_mogelijk"]');
+        const gewensteDatumContainer = document.getElementById('veld-gewenste-datum');
+        
+        if (concertdagRadios.length > 0 && gewensteDatumContainer) {
+            function updateConcertdagVelden() {
+                const neeIsGeselecteerd = form.querySelector('input[name="concertdag_mogelijk"][value="nee"]').checked;
+                
+                if (neeIsGeselecteerd) {
+                    gewensteDatumContainer.hidden = false;
+                } else {
+                    gewensteDatumContainer.hidden = true;
+                    // Maak de input veilig leeg en verwijder eventuele fouten als de gebruiker van gedachten verandert
+                    const datumInput = document.getElementById('gewenste-datum');
+                    if (datumInput) {
+                        verwijderFoutmelding(datumInput);
+                    }
+                }
+                if (typeof checkFormulierStatus === 'function') checkFormulierStatus();
+            }
+
+            concertdagRadios.forEach(radio => radio.addEventListener('change', updateConcertdagVelden));
+            // Draai eenmaal bij het inladen (voor als LocalStorage een 'Nee' terugzet)
+            updateConcertdagVelden();
+        }
+
         // 2. INCLUSIEVE TEKST-TELLERS 
         const textareas = form.querySelectorAll('textarea');
         textareas.forEach(veld => {
