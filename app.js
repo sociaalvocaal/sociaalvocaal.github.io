@@ -426,6 +426,12 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!controleKnop || !foutLijst || !foutOverzicht) return; 
 
         const storageKey = `sv-form-data-${form.id || 'standaard'}`;
+        const timeKey = `${storageKey}-starttijd`;
+
+        // 0b. BEVEILIGING: Starttijd vastleggen (Time-trap)
+        if (!localStorage.getItem(timeKey)) {
+            localStorage.setItem(timeKey, Date.now().toString());
+        }
 
         // 1. PROGRESSIVE ENHANCEMENT: CONTACTVELDEN (100% Schaalbaar)
         function setupDynamischeContactVelden(selectNaam, prefixVeld) {
@@ -479,8 +485,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const concertdagRadios = form.querySelectorAll('input[name="concertdag_mogelijk"]');
         const gewensteDatumContainer = document.getElementById('veld-gewenste-datum');
         
+        let updateConcertdagVelden = null; // Zorg dat de variabele altijd globaal binnen het formulier bestaat
+        
         if (concertdagRadios.length > 0 && gewensteDatumContainer) {
-            function updateConcertdagVelden() {
+            updateConcertdagVelden = function() {
                 const neeIsGeselecteerd = form.querySelector('input[name="concertdag_mogelijk"][value="nee"]').checked;
                 
                 if (neeIsGeselecteerd) {
@@ -550,6 +558,14 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             
             // --- Vanaf hier controleren we de inhoud (óók voor optionele velden die wel zijn ingevuld) ---
+            
+            // BEVEILIGING: Dwing invoerlimieten af (voorkomt megabyte-aanvallen bij aangepaste HTML)
+            const htmlMax = parseInt(input.getAttribute('maxlength'), 10);
+            const veiligeMax = htmlMax || (input.tagName.toLowerCase() === 'textarea' ? 3000 : 250);
+            if (input.value.length > veiligeMax) {
+                const teveel = input.value.length - veiligeMax;
+                meldingen.push(`Deze tekst is ${teveel} tekens te lang (maximaal ${veiligeMax} tekens toegestaan).`);
+            }
 
             if (input.type === 'email') {
                 let hasAt = spatielozeWaarde.includes('@');
@@ -758,7 +774,9 @@ document.addEventListener('DOMContentLoaded', () => {
                             veld.dispatchEvent(new Event('input', { bubbles: true }));
                         }
                     });
-                    if(contactSelect) updateContactVelden();
+                    if (typeof updatePrimairContact === 'function') updatePrimairContact();
+                    if (typeof updateBackupContact === 'function') updateBackupContact();
+                    if (typeof updateConcertdagVelden === 'function') updateConcertdagVelden();
                 } catch (e) {
                     console.error("Fout bij laden formulier data", e);
                 }
@@ -778,6 +796,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // 2. Wacht een milliseconde tot de browser de velden native heeft leeggemaakt
             setTimeout(() => {
                 localStorage.removeItem(storageKey);
+                localStorage.setItem(timeKey, Date.now().toString()); // Zet de klok weer op nu
                 foutLijst.innerHTML = '';
                 foutOverzicht.hidden = true;
                 
@@ -791,14 +810,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 });
                 
-                if (contactSelect) updateContactVelden();
+                if (typeof updatePrimairContact === 'function') updatePrimairContact();
+                if (typeof updateBackupContact === 'function') updateBackupContact();
+                if (typeof updateConcertdagVelden === 'function') updateConcertdagVelden();
                 checkFormulierStatus();
                 
-                // 4. 🟢 NIEUW: Akoestische bevestiging voor schermlezers
+                // 4. Akoestische bevestiging voor schermlezers
                 const statusRegio = form.querySelector('#verwijder-status');
                 if (statusRegio) {
                     statusRegio.textContent = "Alle ingevulde gegevens zijn succesvol gewist. Je staat nu weer bij de eerste vraag.";
-                    // Maak de melding na 3 seconden weer leeg zodat hij een volgende keer opnieuw kan worden voorgelezen
                     setTimeout(() => statusRegio.textContent = '', 3000);
                 }
 
@@ -927,7 +947,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const btnTekst = controleKnop.querySelector('.crescendo-text') || controleKnop;
                 if(btnTekst) btnTekst.textContent = "Laden...";
 
-                // 🟢 NIEUW: Bouw dynamisch een menselijk leesbaar formulier-overzicht op
+                // Bouw dynamisch een menselijk leesbaar formulier-overzicht op
                 const overzichtData = [];
                 const alleVelden = Array.from(form.querySelectorAll('input[name], select[name], textarea[name]'));
                 const verwerkteNamen = new Set();
@@ -935,6 +955,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 alleVelden.forEach(veld => {
                     if (verwerkteNamen.has(veld.name)) return; // Bij radio's maar 1 keer scannen
                     if (veld.closest('[hidden]')) return; // Negeer velden die door de gebruiker onzichtbaar zijn gelaten
+                    if (veld.name === 'botcheck' || veld.closest('[aria-hidden="true"]')) return;
                     verwerkteNamen.add(veld.name);
                     
                     let vraagTekst = veld.name;
@@ -991,17 +1012,24 @@ document.addEventListener('DOMContentLoaded', () => {
                         overzichtData.push({ sectie: sectieTitel, vraag: vraagTekst, antwoord: antwoordTekst });
                     }
                 });
-                
+
+                // Bereken hoe lang het invullen duurde (in milliseconden)
+                const startTijd = parseInt(localStorage.getItem(timeKey), 10) || Date.now();
+                const invulDuurMs = Date.now() - startTijd;
+                localStorage.setItem(`${storageKey}-duur`, invulDuurMs.toString());
+
                 // Sla het leesbare pakketje op in het geheugen
                 localStorage.setItem(storageKey + '-overzicht', JSON.stringify(overzichtData));
                 
-                // 🟢 NIEUW: Geef aan controle.js door vanaf welk formulier en welke pagina we komen
+                // Geef aan controle.js door vanaf welk formulier en welke pagina we komen
                 localStorage.setItem('sv-actieve-formulier-id', form.id || 'standaard');
                 localStorage.setItem('sv-actieve-formulier-url', window.location.href);
-                
-                // 3. Navigeer naar de NIEUWE controlepagina
+                if (form.dataset.apikey) localStorage.setItem(`${storageKey}-apikey`, form.dataset.apikey);
+                if (form.dataset.subject) localStorage.setItem(`${storageKey}-subject`, form.dataset.subject);
+
+                // 3. Navigeer naar de controlepagina
                 setTimeout(() => {
-                    window.location.href = 'sjabloon_formulier_controlepagina.html'; 
+                    window.location.href = 'aanvraag-controleren.html'; 
                 }, 1000);
             }
         });

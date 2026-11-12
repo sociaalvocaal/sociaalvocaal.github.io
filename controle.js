@@ -12,9 +12,15 @@ document.addEventListener('DOMContentLoaded', () => {
     if (terugLinkTekst) terugLinkTekst.href = originUrl;
     if (terugLinkKnop) terugLinkKnop.href = originUrl;
 
-    // Bepaal de dynamische sleutels voor dit specifieke formulier
+    // Bepaal de dynamische sleutels voor dit specifieke formulier (1x gedeclareerd)
     const storageKeyOverzicht = `sv-form-data-${formId}-overzicht`;
     const storageKeyOrigineel = `sv-form-data-${formId}`;
+    const storageKeyStarttijd = `sv-form-data-${formId}-starttijd`;
+    const storageKeyDuur = `sv-form-data-${formId}-duur`;
+    const storageKeyApiKey = `sv-form-data-${formId}-apikey`;
+    const storageKeySubject = `sv-form-data-${formId}-subject`;
+    const controlePaginaStart = Date.now(); // Meet ook hoe lang ze op de controlepagina zelf zijn
+
     const opgeslagenData = localStorage.getItem(storageKeyOverzicht);
 
     if (!opgeslagenData) {
@@ -77,64 +83,85 @@ document.addEventListener('DOMContentLoaded', () => {
 
     container.appendChild(hoofdOverzicht);
 
-// 3. De knop: Definitief verzenden (Met API backend-koppeling)
+    // Helper om alle formulier-gerelateerde sleutels in één keer te wissen
+    function wisAlleFormulierData() {
+        localStorage.removeItem(storageKeyOrigineel);
+        localStorage.removeItem(storageKeyOverzicht);
+        localStorage.removeItem(storageKeyStarttijd);
+        localStorage.removeItem(storageKeyDuur);
+        localStorage.removeItem(storageKeyApiKey);
+        localStorage.removeItem(storageKeySubject);
+        localStorage.removeItem('sv-actieve-formulier-id');
+        localStorage.removeItem('sv-actieve-formulier-url');
+    }
+
+    // 3. De knop: Definitief verzenden (Volledig schaalbaar & API-gekoppeld)
     if (verzendKnop) {
         verzendKnop.addEventListener('click', () => {
             verzendKnop.disabled = true;
             const btnTekst = verzendKnop.querySelector('.crescendo-text');
-            if(btnTekst) btnTekst.textContent = "Aanvraag versturen...";
+            if (btnTekst) btnTekst.textContent = "Aanvraag versturen...";
             
-            // Haal het opgeslagen formulieroverzicht op om te versturen
-            const verzendData = JSON.parse(localStorage.getItem(storageKeyOverzicht));
+            // BEVEILIGING: Time-trap & Honeypot controle
+            const invulDuur = parseInt(localStorage.getItem(storageKeyDuur), 10) || 0;
+            const controleDuur = Date.now() - controlePaginaStart;
+            const isVerdachtSnel = (invulDuur < 5000) || (controleDuur < 800);
+
+            const ruweFormulierData = JSON.parse(localStorage.getItem(storageKeyOrigineel) || '{}');
+            const honeypotGevuld = Boolean(ruweFormulierData.botcheck);
+
+            if (isVerdachtSnel || honeypotGevuld) {
+                // SILENT DROP: Doe net alsof het verzonden is, maar stuur niets naar Web3Forms
+                wisAlleFormulierData();
+
+                setTimeout(() => {
+                    window.location.href = 'aanvraag-verzonden.html';
+                }, 600);
+                return;
+            }
+
+            // Haal de dynamische formulier-instellingen op, of gebruik veilige fallbacks
+            const apiKey = localStorage.getItem(storageKeyApiKey) || verzendKnop.dataset.apikey || "d4adb78c-f276-4f7b-9c38-a5392aa40806";
+            const formSubject = localStorage.getItem(storageKeySubject) || verzendKnop.dataset.subject || "Nieuwe Concert Aanvraag via Website";
             
-            // Formatteer de data naar een leesbare tekst voor in de e-mail
-            let emailInhoud = "Nieuwe concertaanvraag via de website:\n\n";
+            const verzendData = JSON.parse(localStorage.getItem(storageKeyOverzicht) || '[]');
+            
+            const payload = new FormData();
+            payload.append("access_key", apiKey);
+            payload.append("subject", formSubject);
+            payload.append("from_name", "Sociaal Vocaal Website");
+
+            let emailInhoud = `Nieuwe aanvraag binnengekomen via ${originUrl}\n\n`;
             verzendData.forEach(item => {
-                emailInhoud += `--- ${item.sectie} ---\n`;
-                emailInhoud += `VRAAG: ${item.vraag}\n`;
-                emailInhoud += `ANTWOORD: ${item.antwoord}\n\n`;
+                const veiligeSectie = String(item.sectie || '').slice(0, 150);
+                const veiligeVraag = String(item.vraag || '').slice(0, 300);
+                const veiligAntwoord = String(item.antwoord || '').slice(0, 3500);
+
+                emailInhoud += `--- ${veiligeSectie} ---\n`;
+                emailInhoud += `VRAAG: ${veiligeVraag}\n`;
+                emailInhoud += `ANTWOORD: ${veiligAntwoord}\n\n`;
             });
+            payload.append("bericht", emailInhoud.slice(0, 25000));
 
-            // Bouw het pakketje (payload) voor de Form API (Voorbeeld via Web3Forms)
-            const payload = {
-                access_key: "d4adb78c-f276-4f7b-9c38-a5392aa40806", 
-                subject: "Nieuwe Concert Aanvraag - Sociaal Vocaal",
-                message: emailInhoud
-            };
-
-            // Stuur de data naar de server
+            // Stuur de data naar de server van Web3Forms
             fetch('https://api.web3forms.com/submit', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
-                body: JSON.stringify(payload)
+                body: payload
             })
-
             .then(async (response) => {
                 if (response.status === 200) {
-                    // Wis ál het formuliergeheugen na succesvol verzenden
-                    localStorage.removeItem(storageKeyOrigineel);
-                    localStorage.removeItem(storageKeyOverzicht);
-                    localStorage.removeItem('sv-actieve-formulier-id');
-                    localStorage.removeItem('sv-actieve-formulier-url');
-                    
-                    if(btnTekst) btnTekst.textContent = "Verzonden!";
-                    
-                    // 🟢 NIEUW: Stuur de gebruiker direct door naar de nieuwe bedankpagina
-                    window.location.href = 'sjabloon_formulier-concert-aanvragen-verzendbevestiging.html';
+                    wisAlleFormulierData();
+                    if (btnTekst) btnTekst.textContent = "Verzonden!";
+                    window.location.href = 'aanvraag-verzonden.html';
                 } else {
-                    throw new Error("Verzenden mislukt via server");
+                    throw new Error("API weigerde het verzoek.");
                 }
             })
-
             .catch(error => {
                 console.error(error);
-                if(btnTekst) btnTekst.textContent = "Definitief verzenden";
+                if (btnTekst) btnTekst.textContent = "Definitief verzenden";
                 verzendKnop.disabled = false;
                 
-                // 1. Zoek of maak de foutmelding-container dynamisch aan
                 let serverErrorDiv = document.getElementById('server-fout');
                 if (!serverErrorDiv) {
                     serverErrorDiv = document.createElement('div');
@@ -142,25 +169,22 @@ document.addEventListener('DOMContentLoaded', () => {
                     serverErrorDiv.className = 'fout-overzicht mt-large';
                     serverErrorDiv.setAttribute('tabindex', '-1');
                     
-                    // Plaats het fout-blok net boven de verzendknop-sectie
                     const submitSectie = verzendKnop.closest('.form-submit-sectie');
                     if (submitSectie && submitSectie.parentNode) {
                         submitSectie.parentNode.insertBefore(serverErrorDiv, submitSectie);
                     }
                 }
                 
-                // 2. Vul het fout-blok met het bestaande, toegankelijke design
                 serverErrorDiv.innerHTML = `
                     <div class="fout-header">
                         <span class="material-symbols-outlined icon-error" aria-hidden="true">wifi_off</span>
                         <h2 style="margin: 0; font-size: clamp(1.25rem, 3vw, 1.5rem);">Verzenden mislukt</h2>
                     </div>
                     <p style="margin-top: 0.5rem; margin-bottom: 0; font-weight: 500;">
-                        Er is iets misgegaan bij het bereiken van de server. Controleer je internetverbinding en probeer het nog eens. Blijft dit gebeuren? Neem dan contact met ons op.
+                        Er is iets misgegaan bij het bereiken van onze beveiligde server. Controleer je internetverbinding en probeer het nog eens. Blijft dit gebeuren? Mail of bel ons dan direct.
                     </p>
                 `;
                 
-                // 3. Toon de fout en trek direct de (schermlezer) focus hierheen
                 serverErrorDiv.hidden = false;
                 serverErrorDiv.focus();
                 serverErrorDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });

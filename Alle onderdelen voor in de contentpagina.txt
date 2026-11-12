@@ -1,0 +1,49 @@
+1. Hero-sectie 
+
+Onderscheidend op een bescheiden menier manier. Het is belangrijk dat het consistent is, maar niet om dezelfde aandacht vraagt als de contentpagina's van de startpagina en de concertverhalen.
+
+2. Navigeer-snel-sectie / Inhoudsopgave
+
+Een blok bovenaan de pagina met ankerlinks (jump-links) om direct naar specifieke secties verderop de pagina te springen.
+
+3. Tekstopmaak & Body-content
+
+Primaire H1-kop
+
+Tussenkoppen (H2, H3, H4): Semantische koppen om de tekst overzichtelijk te structureren.
+
+Citaat in kop: Een inspirerende quote of pay-off in verwerkt wordt.
+
+Inleiding (Lead): Een korte, krachtige introductietekst die de bezoeker direct vertelt waar de pagina over gaat.
+
+Body-tekst: De eigenlijke, doorlopende alinea's.
+
+Lijstopmaken: Standaard opsommingen (ongeordend <ul> met bullets, en geordend <ol> met cijfers).
+
+Definitielijsten (<dl>, <dt>, <dd>): Specifieke lijsten voor het koppelen van termen aan beschrijvingen (bijv. begrippenlijsten of metadata).
+
+Blockquotes: Grote, visueel opvallende kaders voor belangrijke citaten uit de tekst.
+
+Afkortingen (<abbr>): Semantische opmaak voor afkortingen, zodat bij een muis-hover de volledige betekenis zichtbaar is.
+
+Scheidingslijnen (<hr>): Harde visuele of semantische lijnen om secties of onderwerpen van elkaar te scheiden.
+
+4. Interactie, Links & Conversie
+
+Inline-links: Standaard hypertekstlinks verwerkt in de lopende zinnen.
+
+Uitgelichte links: Opvallendere links (bijvoorbeeld met een icoontje of afwijkende styling) die belangrijke bronnen of documenten uitlichten.
+
+Knoppen
+
+5. Media & Externe Inhoud
+
+Inline afbeeldingen.
+
+6. Data & Formulieren
+
+Informatieve tabellen: Rijen en kolommen om gestructureerde data overzichtelijk te vergelijken.
+
+7. Footer & Onder-de-motorkap
+
+Back-to-top knop: Een zwevende knop rechtsonderin die bij langere pagina's verschijnt om snel terug naar de navigatie te scrollen.

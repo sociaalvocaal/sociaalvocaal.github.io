@@ -550,7 +550,28 @@ hr {
 }
 
 /* ==========================================================================
-   5. Knoppen (btn)
+   5. Beveiliging (Spam Honeypot)
+   ========================================================================== */
+
+/* 
+  Camouflage-techniek: 
+  Verberg het veld visueel voor mensen, maar houd het technisch 'zichtbaar' voor bots.
+  Gebruik géén display:none of visibility:hidden, anders scannen slimme bots er overheen.
+*/
+.sv-meta-group {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 1px;
+    width: 1px;
+    z-index: -1;
+    pointer-events: none; /* Voorkom dat mensen er per ongeluk op kunnen klikken */
+    overflow: hidden;
+}
+
+/* ==========================================================================
+   6. Knoppen (btn)
    ========================================================================== */
 
 /* --- Basisknop --- */
@@ -622,7 +643,7 @@ hr {
 }
 
 /* ==========================================================================
-   6. Header
+   7. Header
    ========================================================================== */
 
 /* --- De zwevende pil (basis) --- */
@@ -1222,7 +1243,7 @@ hr {
 }
 
 /* ==========================================================================
-   7. Formulier
+   8. Formulier
    ========================================================================== */
 
 /* --- Basis formulierlay-out --- */
@@ -2209,7 +2230,7 @@ margin: 0 auto;
 }
 
 /* ==========================================================================
-   9. Carrousel- en impactsecties
+   10. Carrousel- en impactsecties
    ========================================================================== */
 
 /* --- Algemene carrouseltrack --- */
@@ -2558,7 +2579,7 @@ picture.card-logo img {
 }
 
 /* ==========================================================================
-   10. Artikelen (concertverhalen)
+   11. Artikelen (concertverhalen)
    ========================================================================== */
 
 /* --- Basis --- */
@@ -3250,7 +3271,7 @@ picture.card-logo img {
 }
 
 /* ==========================================================================
-   11. Footer
+   12. Footer
    ========================================================================== */
 
 .new-footer {
@@ -3600,7 +3621,7 @@ picture.card-logo img {
 }
 
 /* ==========================================================================
-   12. CONTENTPAGINA
+   13. CONTENTPAGINA
    ========================================================================== */
 
 /* --- A. Redactionele Rust (Tekstomloop & Punctuation) --- */
@@ -3856,7 +3877,7 @@ h2, h3, h4, p, li, dd {
 
 
 /* ==========================================================================
-   13. Opmaakregels voor opslaan als pdf/print
+   14. Opmaakregels voor opslaan als pdf/print
    ========================================================================== */
    
 @media print {
@@ -3949,7 +3970,7 @@ h2, h3, h4, p, li, dd {
 }
 
 /* ==========================================================================
-   14. Controlepagina (Samenvattingsoverzicht)
+   15. Controlepagina (Samenvattingsoverzicht)
    ========================================================================== */
 
 .controle-overzicht {
@@ -4063,7 +4084,7 @@ h2, h3, h4, p, li, dd {
 }
 
 /* ==========================================================================
-   15. Succes- en Bedankpagina
+   16. Succes- en Bedankpagina
    ========================================================================== */
 
 .succes-bento {
