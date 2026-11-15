@@ -440,26 +440,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
             function updateVelden() {
                 const geselecteerd = select.value;
+                // koppel 'whatsapp' aan dezelfde veld-container als 'telefoon'
+                const actieveGroep = (geselecteerd === 'whatsapp') ? 'telefoon' : geselecteerd;
+                const verwerkteGroepen = new Set();
                 
                 Array.from(select.options).forEach(optie => {
                     const waarde = optie.value;
                     if (!waarde) return; 
                     
-                    const container = form.querySelector(`#${prefixVeld}-${waarde}`);
+                    const doelGroep = (waarde === 'whatsapp') ? 'telefoon' : waarde;
+                    if (verwerkteGroepen.has(doelGroep)) return;
+                    verwerkteGroepen.add(doelGroep);
+
+                    const container = form.querySelector(`#${prefixVeld}-${doelGroep}`);
                     if (!container) return; 
 
-                    if (waarde === geselecteerd) {
+                    if (doelGroep === actieveGroep) {
                         container.hidden = false;
                         container.querySelectorAll('input, select, textarea').forEach(input => {
-                            // Een veld is alleen verplicht als de hoofd-dropdown dat ook is
                             input.required = select.hasAttribute('required');
                         });
                     } else {
                         container.hidden = true;
                         container.querySelectorAll('input, select, textarea').forEach(input => {
                             input.required = false;
-                            
-                            // Haal direct eventuele validatiefouten weg omdat we dit veld verbergen
                             input.classList.remove('is-invalid');
                             input.removeAttribute('aria-invalid');
                             let fout = container.nextElementSibling;
@@ -940,12 +944,14 @@ document.addEventListener('DOMContentLoaded', () => {
 } else {
                 foutOverzicht.hidden = true;
                 
-                const verzendStatus = form.querySelector('.sr-only[aria-live="assertive"]'); 
-                if(verzendStatus) verzendStatus.textContent = "Gegevens worden verwerkt, je gaat nu naar de controlepagina...";
+                const verzendStatus = form.querySelector('#verzend-status') || form.querySelector('.sr-only[aria-live="assertive"]'); 
+                if (verzendStatus) {
+                    verzendStatus.textContent = "Gegevens worden verwerkt, je gaat nu naar de controlepagina...";
+                }
                 
                 controleKnop.disabled = true;
                 const btnTekst = controleKnop.querySelector('.crescendo-text') || controleKnop;
-                if(btnTekst) btnTekst.textContent = "Laden...";
+                if (btnTekst) btnTekst.textContent = "Laden...";
 
                 // Bouw dynamisch een menselijk leesbaar formulier-overzicht op
                 const overzichtData = [];
@@ -971,7 +977,6 @@ document.addEventListener('DOMContentLoaded', () => {
                                 vraagTekst = legend.textContent.replace('*', '').replace(/Vraag \d+ van \d+ \((niet )?verplicht\)\.?/i, '').trim();
                             }
                         }
-                        // Haal de tekst van het bolletje op (bijv. "Ja, ik wil dat" i.p.v. alleen "ja")
                         const checked = form.querySelector(`input[name="${veld.name}"]:checked`);
                         if (checked) {
                             const radioLabel = form.querySelector(`label[for="${checked.id}"] .radio-text`);
@@ -999,15 +1004,14 @@ document.addEventListener('DOMContentLoaded', () => {
                         }
                     }
                     
-                    // 2. Haal de sectietitel op voor groepering (bijv. "1. Jouw gegevens")
+                    // 2. Haal de sectietitel op voor groepering
                     const sectie = veld.closest('.form-bento-sectie');
-                    let sectieTitel = "Gegevens";
+                    let sectieTitel = "Jouw ingevulde gegevens";
                     if (sectie) {
                         const titelEl = sectie.querySelector('.bento-sectie-titel');
                         if (titelEl) sectieTitel = titelEl.textContent.trim();
                     }
                     
-                    // Alleen toevoegen als het geen reset/submit sectie is
                     if (!sectieTitel.includes('Naar controle')) {
                         overzichtData.push({ sectie: sectieTitel, vraag: vraagTekst, antwoord: antwoordTekst });
                     }
@@ -1016,20 +1020,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Bereken hoe lang het invullen duurde (in milliseconden)
                 const startTijd = parseInt(localStorage.getItem(timeKey), 10) || Date.now();
                 const invulDuurMs = Date.now() - startTijd;
-                localStorage.setItem(`${storageKey}-duur`, invulDuurMs.toString());
 
-                // Sla het leesbare pakketje op in het geheugen
+                // Sla gegevens op en stuur door naar de controlepagina
+                localStorage.setItem(`${storageKey}-duur`, invulDuurMs.toString());
                 localStorage.setItem(storageKey + '-overzicht', JSON.stringify(overzichtData));
-                
-                // Geef aan controle.js door vanaf welk formulier en welke pagina we komen
                 localStorage.setItem('sv-actieve-formulier-id', form.id || 'standaard');
                 localStorage.setItem('sv-actieve-formulier-url', window.location.href);
                 if (form.dataset.apikey) localStorage.setItem(`${storageKey}-apikey`, form.dataset.apikey);
                 if (form.dataset.subject) localStorage.setItem(`${storageKey}-subject`, form.dataset.subject);
 
-                // 3. Navigeer naar de controlepagina
                 setTimeout(() => {
-                    window.location.href = 'aanvraag-controleren.html'; 
+                    window.location.href = '/aanvraag-controleren.html'; 
                 }, 1000);
             }
         });

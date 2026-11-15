@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // 1. Haal dynamisch op welk formulier we aan het controleren zijn
     const formId = localStorage.getItem('sv-actieve-formulier-id') || 'standaard';
-    const originUrl = localStorage.getItem('sv-actieve-formulier-url') || 'index.html';
+    const originUrl = localStorage.getItem('sv-actieve-formulier-url') || '/index.html';
     
     // 2. Vul de 'Ga Terug' knoppen met de originele URL van de gebruiker
     if (terugLinkTekst) terugLinkTekst.href = originUrl;
@@ -100,7 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
         verzendKnop.addEventListener('click', () => {
             verzendKnop.disabled = true;
             const btnTekst = verzendKnop.querySelector('.crescendo-text');
-            if (btnTekst) btnTekst.textContent = "Aanvraag versturen...";
+            if (btnTekst) btnTekst.textContent = "Bezig met versturen...";
             
             // BEVEILIGING: Time-trap & Honeypot controle
             const invulDuur = parseInt(localStorage.getItem(storageKeyDuur), 10) || 0;
@@ -115,13 +115,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 wisAlleFormulierData();
 
                 setTimeout(() => {
-                    window.location.href = 'aanvraag-verzonden.html';
+                    window.location.href = '/aanvraag-verzonden.html';
                 }, 600);
                 return;
             }
 
             // Haal de dynamische formulier-instellingen op, of gebruik veilige fallbacks
-            const apiKey = localStorage.getItem(storageKeyApiKey) || verzendKnop.dataset.apikey || "d4adb78c-f276-4f7b-9c38-a5392aa40806";
+            const apiKey = localStorage.getItem(storageKeyApiKey) || verzendKnop.dataset.apikey || "73491bb7-7201-4a52-8a3b-b6956c5387f2";
             const formSubject = localStorage.getItem(storageKeySubject) || verzendKnop.dataset.subject || "Nieuwe Concert Aanvraag via Website";
             
             const verzendData = JSON.parse(localStorage.getItem(storageKeyOverzicht) || '[]');
@@ -131,7 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
             payload.append("subject", formSubject);
             payload.append("from_name", "Sociaal Vocaal Website");
 
-            let emailInhoud = `Nieuwe aanvraag binnengekomen via ${originUrl}\n\n`;
+            let emailInhoud = `Nieuwe inzending binnengekomen via ${originUrl}\n\n`;
             verzendData.forEach(item => {
                 const veiligeSectie = String(item.sectie || '').slice(0, 150);
                 const veiligeVraag = String(item.vraag || '').slice(0, 300);
@@ -152,7 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (response.status === 200) {
                     wisAlleFormulierData();
                     if (btnTekst) btnTekst.textContent = "Verzonden!";
-                    window.location.href = 'aanvraag-verzonden.html';
+                    window.location.href = '/aanvraag-verzonden.html';
                 } else {
                     throw new Error("API weigerde het verzoek.");
                 }

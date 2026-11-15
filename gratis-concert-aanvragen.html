@@ -6,7 +6,7 @@
     <title>Aanvraagformulier gratis serenade in Utrecht | Sociaal Vocaal</title>
     <meta name="description" content="Verras iemand met een gratis serenade in Utrecht! Sociaal Vocaal is een a-capellakoor dat zingt om te bedanken, op te vrolijken of te troosten.">
     <!-- Note to self: update later hieronder de canonical met jullie definitieve, beveiligde url. Dat is goed voor de SEO. -->
-    <link rel="canonical" href="[https://sociaalvocaal.nl/gratis-concert-aanvragen.html](https://sociaalvocaal.nl/gratis-concert-aanvragen.html)" />
+    <link rel="canonical" href="https://sociaalvocaal.nl/gratis-concert-aanvragen"/>
     <link rel="stylesheet" href="index.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -29,15 +29,15 @@
     <nav aria-label="Snelkoppelingen" class="skip-links-hub">
         <ul class="skip-list">
             <li><a href="#hoofdinhoud" class="skip-btn">Naar hoofdinhoud</a></li>
-            <li><a href="#start-formulier" class="skip-btn">Direct concert aanvragen</a></li>
-            <li><a href="#sitemap-placeholder" class="skip-btn">Naar sitemap</a></li>
+            <li><a href="/gratis-concert-aanvragen" class="skip-btn">Direct concert aanvragen</a></li>
+            <li><a href="/sitemap" class="skip-btn">Naar sitemap</a></li>
         </ul>
     </nav>
 
     <!-- De altijd zichtbare basis van de pil -->
     <div class="pill-bar">
         <!-- Slim logo dat animeert bij scrollen -->
-        <a href="index.html" class="logo-link" aria-label="Sociaal Vocaal startpagina">
+        <a href="/index" class="logo-link" aria-label="Sociaal Vocaal startpagina">
             <span class="logo-text-container">
                 <span class="logo-full">Sociaal Vocaal</span>
                 <span class="logo-short" aria-hidden="true">SV</span>
@@ -47,8 +47,8 @@
         <!-- Actieknoppen en menu-toggle -->
         <div class="pill-actions">
             <!-- Desktop acties: visueel verborgen op mobiel om de pil compact te houden -->
-            <a href="#start-formulier" class="btn btn-primary btn-small desktop-only">Concert aanvragen</a>
-            <a href="#doe-mee" class="btn btn-white btn-small desktop-only">Zing mee</a>
+            <a href="/gratis-concert-aanvragen" class="btn btn-primary btn-small desktop-only">Concert aanvragen</a>
+            <a href="index#doe-mee" class="btn btn-white btn-small desktop-only">Zing mee</a>
             
             <button id="menu-toggle" class="menu-btn" aria-expanded="false" aria-controls="morphing-menu" aria-label="Open hoofdmenu">
                 <span class="menu-btn-text sr-only">Menu</span>
@@ -66,27 +66,27 @@
                 <div class="menu-bento-item card-white">
                     <p id="menu-snel-regelen" class="menu-heading">Snel regelen</p>
                     <ul class="menu-list" aria-labelledby="menu-snel-regelen">
-                        <li><a href="#contact">Contact</a></li>
-                        <li><a href="#start-formulier">Gratis concert aanvragen</a></li>
-                        <li><a href="#doe-mee">Zing mee in ons koor</a></li>
+                        <li><a href="/contact">Contact</a></li>
+                        <li><a href="/gratis-concert-aanvragen">Gratis concert aanvragen</a></li>
+                        <li><a href="/index#doe-mee">Zing mee in ons koor</a></li>
                     </ul>
                 </div>
                 
                 <div class="menu-bento-item card-white">
                     <p id="menu-ontdekken" class="menu-heading">Ontdekken</p>
                     <ul class="menu-list" aria-labelledby="menu-ontdekken">
-                        <li><a href="#">Agenda</a></li>
-                        <li><a href="#">Onze muziek</a></li>
-                        <li><a href="#ons-verhaal">Ons verhaal</a></li>
+                        <li><a href="/index#agenda">Agenda</a></li>
+                        <li><a href="/#">Onze muziek</a></li>
+                        <li><a href="/index#ons-verhaal">Ons verhaal</a></li>
                     </ul>
                 </div>
                 
                 <div class="menu-bento-item card-white">
                     <p id="menu-samenwerken" class="menu-heading">Samenwerken & steunen</p>
                     <ul class="menu-list" aria-labelledby="menu-samenwerken">
-                        <li><a href="#samenwerken">Artistiek samenwerken</a></li>
-                        <li><a href="#samenwerken">Zakelijk</a></li>
-                        <li><a href="#samenwerken">Steun ons</a></li>
+                        <li><a href="/index#samenwerken">Artistiek samenwerken</a></li>
+                        <li><a href="/index#samenwerken">Zakelijk</a></li>
+                        <li><a href="/index#samenwerken">Steun ons</a></li>
                     </ul>
                 </div>
 
@@ -100,8 +100,7 @@
 
     <section class="hero-section-contentpagina section-padding">
         <div class="container container-inhoud">
-            <div class="container">
-                <div class="hero-content">
+            <div class="hero-content">
                 <h1 class="hero-heading">Vraag een <span class="font-italic">gratis concert</span> aan.</h1>
                     <p class="hero-lead">Op deze pagina vraag je een gratis concert aan voor iemand, een groep of een goed doel.</p> 
                         <nav aria-labelledby="toc-heading">
@@ -112,12 +111,14 @@
                             </ul>
                         </nav>
             </div>  
-        </div>
-    </section>
+    </div>
+</section>
+
+<section id="uitleg-en-formulier" class="section-padding" style="padding-top: 0;">
     <div class="container">
-        <hr class="mb-large">        
+        <hr class="mb-large">       
         <h2 id="hoe-werkt-het">Hoe werkt het?</h2>
-                    <p>We organiseren concertdagen in en in de omgeving van de stad Utrecht. Op een concertdag geven we meerdere concerten op locatie. Op zaterdag 9 januari 2026 is de eerstvolgende concertdag. Het makkelijkste is om op die dag een tijd te reserveren.</p>
+                    <p>We organiseren concertdagen in en in de omgeving van de stad Utrecht. Op een concertdag geven we meerdere concerten op locatie. Op zaterdag 9 januari 2027 is de eerstvolgende concertdag. Het makkelijkste is om op die dag een tijd te reserveren.</p>
                     <p>Kan je die dag niet? Laat dit weten in het formulier. Daarna spreken we met jou de mogelijkheden door.</p>
                     <p>Een aanvraag doe je in 4 stappen.</p>
                         <ol>
@@ -141,8 +142,8 @@
 
         <hr class="mb-large">        
         <h2 id="start-formulier">Aanvraag&shy;formulier</h2>
-            <p>Neem de tijd en ruimte om in het formulier je verhaal te delen met ons, zodat wij het concert zo goed mogelijk op jouw situatie aan kunnen laten sluiten. Er zijn 10 vragen. Daarvan zijn er 3 verplicht.</p> 
-            <p>Bel je liever? Vul dan het <a href=#contact class="text-link"> het contactformulier</a> (pagina nog in aanbouw) in en vraag om een belverzoek.</p>
+            <p>Neem de tijd en ruimte om in het formulier je verhaal te delen met ons, zodat wij het concert zo goed mogelijk op jouw situatie aan kunnen laten sluiten. Er zijn 10 vragen. Daarvan zijn er 4 verplicht.</p> 
+            <p>Bel je liever? Vul dan <a href="/contact" class="text-link">het contactformulier</a> in en vraag om een belverzoek.</p>
             <p>Vraag je zakelijk aan? Ga dan naar het <a href="#" class="text-link">zakelijk aanvraagformulier</a> (pagina nog in aanbouw) .</p>
             <p class="pb-medium">Om jouw privacy te beschermen kan je dit formulier anoniem invullen. Verder bewaren we jouw contactgegevens nadat onze gesprekken afgerond zijn voor maximaal 6 maanden. We verwijderen jouw gegevens eerder als je dat vraagt.</p>
         
@@ -189,7 +190,7 @@
                                 <option value="">Maak een keuze...</option>
                                 <option value="email">Mail mij</option>
                                 <option value="telefoon">Bel mij</option>
-                                <option value="telefoon">Stuur me een berichtje op WhatsApp</option>
+                                <option value="whatsapp">Stuur me een berichtje op WhatsApp</option>
                                 <option value="instagram">Stuur me een berichtje op Instagram</option>
                             </select>
                         </div>
@@ -233,7 +234,7 @@
                                 <option value="">Maak een keuze...</option>
                                 <option value="email">Mail mij</option>
                                 <option value="telefoon">Bel mij</option>
-                                <option value="telefoon">Stuur me een berichtje op WhatsApp</option>
+                                <option value="whatsapp">Stuur me een berichtje op WhatsApp</option>
                                 <option value="instagram">Stuur me een berichtje op Instagram</option>                            </select>
                         </div>
 
@@ -325,7 +326,7 @@
                         <p id="adres-locatie-uitleg" class="sv-description">Weet je nog niet waar concert is? Geen probleem! Dit mag je ook later aan ons vertellen.</p>
 
                         <div class="sv-input-wrapper">
-                            <input type="text" id="adres-locatie" name="adres_locatie" class="sv-input" autocomplete="street-address" aria-describedby="adres-voorbeeld">
+                            <input type="text" id="adres-locatie" name="adres_locatie" class="sv-input" autocomplete="street-address" aria-describedby="adres-voorbeeld adres-locatie-uitleg">
                         </div>
                     </div>
 
@@ -362,6 +363,7 @@
                             <label class="tactile-radio-card" for="media-fotos"><input type="radio" id="media-fotos" name="media_toestemming" value="alleen_fotos" required class="sr-only"><span class="radio-visual"></span><span class="radio-text">Ja, maar alléén foto's.</span></label>
                             <label class="tactile-radio-card" for="media-videos"><input type="radio" id="media-videos" name="media_toestemming" value="alleen_videos" required class="sr-only"><span class="radio-visual"></span><span class="radio-text">Ja, maar alléén video's.</span></label>
                             <label class="tactile-radio-card" for="media-geen"><input type="radio" id="media-geen" name="media_toestemming" value="geen_toestemming" required class="sr-only"><span class="radio-visual"></span><span class="radio-text">Nee, géén toestemming.</span></label>
+                            <label class="tactile-radio-card" for="media-onbekend"><input type="radio" id="media-onbekend" name="media_toestemming" value="onbekend" required class="sr-only"><span class="radio-visual"></span><span class="radio-text">Weet ik nog niet.</span></label>
                             <label class="tactile-radio-card" for="media-bespreken"><input type="radio" id="media-bespreken" name="media_toestemming" value="bespreken" required class="sr-only"><span class="radio-visual"></span><span class="radio-text">Laten we het even bespreken.</span></label>
                         </div>
                     </fieldset>
@@ -432,39 +434,32 @@
             <!-- Visuele Focus 1: Contactgegevens prominent in het midden -->
             <div class="footer-block footer-contact">
                 <h2 class="footer-heading">Contact</h2>
-                <ul class="footer-contact-list">
-                    <li>
-                        <a href="tel:+00000000000" class="footer-primary-link">
-                            <span class="material-symbols-outlined" aria-hidden="true">call</span>
-                            +00000000000
-                        </a>
-                    </li>
-                    <li>
-                        <a href="mailto:info@sociaalvocaal.nl" class="footer-primary-link">
+                    <ul class="footer-inline-links">
+                        <li>
+                            <a href="mailto:info@sociaalvocaal.nl" class="footer-primary-link">
                             <span class="material-symbols-outlined" aria-hidden="true">mail</span>
                             info@sociaalvocaal.nl
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://maps.app.goo.gl/AUjiTvBH22xHCn5e8" class="footer-primary-link">
-                            <span class="material-symbols-outlined" aria-hidden="true">location_on</span>
-                            Extralangeadresregel 133, Utrecht
-                        </a>
-                    </li>
-                </ul>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/contact" class="footer-primary-link">
+                                Contactpagina
+                            </a>
+                        </li>
+                    </ul>
             </div>
 
             <!-- Visuele Focus 2: Vlakke, ontspannen sitenavigatie -->
             <div class="footer-block footer-nav">
                 <h2 class="footer-heading">Navigeer verder naar</h2>
                 <ul class="footer-inline-links">
-                    <li><a href="#" class="sitemap-link"><span class="material-symbols-outlined" aria-hidden="true">account_tree</span>Sitemap</a></li>
+                    <li><a href="/sitemap" class="sitemap-link"><span class="material-symbols-outlined" aria-hidden="true">account_tree</span>Sitemap</a></li>
                     <li><a href="#start-formulier">Concert aanvragen</a></li>
-                    <li><a href="#doe-mee">Zing mee</a></li>
-                    <li><a href="#samenwerken">Samenwerken en steunen</a></li>
-                    <li><a href="#">Agenda</a></li>
+                    <li><a href="/index#doe-mee">Zing mee</a></li>
+                    <li><a href="/index#samenwerken">Samenwerken en steunen</a></li>
+                    <li><a href="/index#agenda">Agenda</a></li>
                     <li><a href="#">Onze muziek</a></li>
-                    <li><a href="#ons-verhaal">Ons verhaal</a></li>
+                    <li><a href="/index#ons-verhaal">Ons verhaal</a></li>
                 </ul>
             </div>
 
@@ -473,8 +468,7 @@
                 <h2 class="footer-heading">Volg ons</h2>
                 <ul class="footer-social-list">
                     <li><a href="https://www.instagram.com/sociaal.vocaal/" aria-label="Instagram"><span class="fa fa-instagram" aria-hidden="true"></span></a></li>
-                    <li><a href="https://wa.me/00000000000" aria-label="WhatsApp"><span class="fa fa-whatsapp" aria-hidden="true"></span></a></li>
-                    <li><a href="https://www.youtube.com/" aria-label="YouTube"><span class="fa fa-youtube" aria-hidden="true"></span></a></li>
+                    <li><a href="https://www.facebook.com/" aria-label="Facebook"><span class="fa fa-facebook" aria-hidden="true"></span></a></li>
                     <li><a href="https://www.linkedin.com/company/sociaal-vocaal/" aria-label="LinkedIn"><span class="fa fa-linkedin" aria-hidden="true"></span></a></li>
                 </ul>
             </div>
@@ -486,13 +480,12 @@
             <div class="container footer-bottom-container">
                 <ul class="footer-legal-list">
                     <li><a href="#">Toegankelijkheidsverklaring</a></li>
-                    <li><a href="#">Cookieverklaring</a></li>
                     <li><a href="#">Privacyverklaring</a></li>
                 </ul>
                 <div class="footer-meta">
                     <ul>
-                        <li><span>Pagina voor laatst bijgewerkt op: donderdag 20 oktober 2026</span></li>
-                        <li><span>Bijgewerkt door: Peter Teunis</span></li>
+                        <li><span>Pagina voor laatst bijgewerkt op: maandag 16 november 2026</span></li>
+                        <li><span >Bijgewerkt door: <a href="https://www.linkedin.com/in/peter-teunis-64045735/">Peter Teunis</a></span></li>
                     </ul>
                 </div>
             </div>
